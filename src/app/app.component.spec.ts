@@ -2,6 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 import {MainComponent} from "./main/main.component";
+import {UserService} from "./user.service";
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -10,6 +11,7 @@ describe('AppComponent', () => {
         AppComponent,
         MainComponent
       ],
+      providers: [UserService]
     }).compileComponents();
   }));
 

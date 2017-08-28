@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-const USERS = [
-  "David",
-  "Chris",
-];
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-main',
@@ -11,14 +7,13 @@ const USERS = [
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  users: string[] = USERS;
+  users: string[];
 
-  constructor() { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit() {
+    this.users = this.userService.users;
   }
 
-  setUsers(users: string[]) {
-    this.users = users;
-  }
 }

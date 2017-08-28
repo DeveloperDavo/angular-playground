@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { MainComponent } from './main/main.component';
+import {AppComponent} from './app.component';
+import {MainComponent} from './main/main.component';
+import {UserService} from "./user.service";
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { MainComponent } from './main/main.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
