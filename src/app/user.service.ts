@@ -8,4 +8,8 @@ export class UserService {
     return MOCK_USERS;
   }
 
+  setUsersForTest(users: User[]) {
+    // TODO: throw "This method should only be used for testing purposes"
+  }
+
 }

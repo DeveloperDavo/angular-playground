@@ -6,10 +6,15 @@ import {UserService} from "../user.service";
 import {User} from "../user";
 
 class UserServiceFake implements UserService {
+
+  private users: User[];
+
   getUsers(): User[] {
-    return [{id: 1, username: "Foo"},
-      {id: 2, username: "Bar"},
-      {id: 3, username: "Baz"}]
+    return this.users;
+  }
+
+  setUsersForTest(users: User[]) {
+    this.users = users;
   }
 
 }
@@ -41,30 +46,38 @@ describe('MainComponent', () => {
   });
 
   it('should render user list with 3 elements', async(() => {
+    const testUsers = [
+      {id: 1, username: "Foo"},
+      {id: 2, username: "Bar"},
+      {id: 3, username: "Baz"}
+    ];
+
+    userService.setUsersForTest(testUsers);
+
     fixture.detectChanges();
 
     const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
-    expect(debugElements[0].nativeElement.textContent).toContain("Foo");
-    expect(debugElements[1].nativeElement.textContent).toContain("Bar");
-    expect(debugElements[2].nativeElement.textContent).toContain("Baz");
+    expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
+    expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
+    expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
   }));
 
-  // it('should render user list with 4 elements', async(() => {
-  //   const givenUsers: User[] = [
-  //     {id: 1, username: "Baz"},
-  //     {id: 2, username: "Foo"},
-  //     {id: 3, username: "Bar"},
-  //     {id: 4, username: "Fizz"}
-  //   ];
-  //
-  //   userService.users = givenUsers;
-  //
-  //   fixture.detectChanges();
-  //
-  //   const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
-  //   expect(debugElements[0].nativeElement.textContent).toContain(givenUsers[0].username);
-  //   expect(debugElements[1].nativeElement.textContent).toContain(givenUsers[1].username);
-  //   expect(debugElements[2].nativeElement.textContent).toContain(givenUsers[2].username);
-  //   expect(debugElements[3].nativeElement.textContent).toContain(givenUsers[3].username);
-  // }));
+  it('should render user list with 4 elements', async(() => {
+    const testUsers: User[] = [
+      {id: 1, username: "Baz"},
+      {id: 2, username: "Foo"},
+      {id: 3, username: "Bar"},
+      {id: 4, username: "Fizz"}
+    ];
+
+    userService.setUsersForTest(testUsers);
+
+    fixture.detectChanges();
+
+    const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
+    expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
+    expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
+    expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
+    expect(debugElements[3].nativeElement.textContent).toContain(testUsers[3].username);
+  }));
 });
