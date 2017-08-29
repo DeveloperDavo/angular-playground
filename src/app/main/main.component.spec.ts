@@ -4,20 +4,8 @@ import {MainComponent} from './main.component';
 import {By} from "@angular/platform-browser";
 import {UserService} from "../user.service";
 import {User} from "../user";
+import {UserServiceFake} from "../user-fake.service";
 
-class UserServiceFake implements UserService {
-
-  private users: User[];
-
-  getUsers(): User[] {
-    return this.users;
-  }
-
-  setUsersForTest(users: User[]) {
-    this.users = users;
-  }
-
-}
 
 describe('MainComponent', () => {
   let component: MainComponent;
