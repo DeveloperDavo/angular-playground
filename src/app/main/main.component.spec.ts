@@ -4,7 +4,7 @@ import {MainComponent} from './main.component';
 import {By} from "@angular/platform-browser";
 import {UserService} from "../user.service";
 import {User} from "../user";
-import {UserServiceFake} from "../user-fake.service";
+import {UserServiceFake} from "../user.service-fake";
 
 
 describe('MainComponent', () => {
