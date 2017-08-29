@@ -4,5 +4,8 @@ import {MOCK_USERS} from "./mock-users";
 
 @Injectable()
 export class UserService {
-  users: User[] = MOCK_USERS;
+  getUsers(): User[] {
+    return MOCK_USERS;
+  }
+
 }
