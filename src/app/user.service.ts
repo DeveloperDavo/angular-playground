@@ -1,12 +1,8 @@
 import {Injectable} from '@angular/core';
 import {User} from "./user";
-
-const USERS: User[] = [
-  {id: 1, username: "david"},
-  {id: 1, username: "chris"},
-];
+import {MOCK_USERS} from "./mock-users";
 
 @Injectable()
 export class UserService {
-  users: User[] = USERS;
+  users: User[] = MOCK_USERS;
 }
