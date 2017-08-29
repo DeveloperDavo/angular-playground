@@ -1,18 +1,20 @@
-import { TestBed, async } from '@angular/core/testing';
+import {TestBed, async} from '@angular/core/testing';
 
-import { AppComponent } from './app.component';
-import {MainComponent} from "./main/main.component";
-import {UserService} from "./user.service";
+import {AppComponent} from './app.component';
+import {Component} from "@angular/core";
+
+@Component({selector: 'app-main', template: ''})
+class MainComponentStub {}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        MainComponent
+        MainComponentStub
       ],
-      providers: [UserService]
-    }).compileComponents();
+    })
+      .compileComponents();
   }));
 
   it('should create the app', async(() => {
