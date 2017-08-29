@@ -14,9 +14,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers().subscribe((users) => {
-      this.users = users;
-    });
+    this.users = this.userService.users;
   }
 
 }

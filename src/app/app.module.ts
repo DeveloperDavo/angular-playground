@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {UserService} from "./user.service";
-import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -12,12 +11,10 @@ import {HttpModule} from "@angular/http";
     MainComponent
   ],
   imports: [
-    BrowserModule,
-    HttpModule
+    BrowserModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
-
 })
 export class AppModule {
 }
