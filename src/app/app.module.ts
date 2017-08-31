@@ -6,7 +6,6 @@ import {MainComponent} from './main/main.component';
 import {UserService} from "./user.service";
 import {HttpClientModule} from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     AppComponent,

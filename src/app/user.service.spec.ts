@@ -23,7 +23,7 @@ describe('UserService', () => {
 
       // At this point, the request is pending, and no response has been
       // sent. The next step is to expect that the request happened.
-      const req = httpMock.expectOne('/data');
+      const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
 
       // If no request with that URL was made, or if multiple requests match,
       // expectOne() would throw. However this test makes only one request to
