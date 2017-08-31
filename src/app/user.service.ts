@@ -1,12 +1,18 @@
 import {Injectable} from '@angular/core';
 import {User} from "./user";
 import {MOCK_USERS} from "./mock-users";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class UserService {
 
+  constructor(public http: HttpClient) {
+  }
+
   getUsers(): Promise<User[]> {
-    return new Promise(res => res(MOCK_USERS));
+    return new Promise(() => {
+      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe();
+    });
   }
 
   setUsersForTest(users: User[]) {
