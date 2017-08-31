@@ -1,15 +1,12 @@
 import {UserService} from "./user.service";
 import {User} from "./user";
-import {HttpClient} from "@angular/common/http";
 
 export class UserServiceFake implements UserService {
-  public http: HttpClient;
+
   private users: User[];
 
-  getUsers(): Promise<User[]> {
-    return new Promise(res => {
-      res(this.users);
-    });
+  getUsers(): User[] {
+    return this.users;
   }
 
   setUsersForTest(users: User[]) {

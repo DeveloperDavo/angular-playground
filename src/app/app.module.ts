@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {MainComponent} from './main/main.component';
 import {UserService} from "./user.service";
-import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,8 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
     MainComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule
+    BrowserModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
