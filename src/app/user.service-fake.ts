@@ -4,7 +4,7 @@ import {HttpClient} from "@angular/common/http";
 
 export class UserServiceFake implements UserService {
   http: HttpClient;
-  private users: User[];
+  users: User[];
 
   getUsers(): User[] {
     return this.users;
