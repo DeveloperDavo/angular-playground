@@ -10,8 +10,10 @@ export class UserService {
   }
 
   getUsers(): Promise<User[]> {
-    return new Promise(() => {
-      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe();
+    return new Promise(res => {
+      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(() => {
+        res(MOCK_USERS);
+      });
     });
   }
 
