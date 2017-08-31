@@ -5,8 +5,8 @@ export class UserServiceFake implements UserService {
 
   private users: User[];
 
-  getUsers(): User[] {
-    return this.users;
+  getUsers(): Promise<User[]> {
+    return new Promise(res => res(this.users));
   }
 
   setUsersForTest(users: User[]) {

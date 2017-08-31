@@ -4,8 +4,9 @@ import {MOCK_USERS} from "./mock-users";
 
 @Injectable()
 export class UserService {
-  getUsers(): User[] {
-    return MOCK_USERS;
+
+  getUsers(): Promise<User[]> {
+    return new Promise(res => res(MOCK_USERS));
   }
 
   setUsersForTest(users: User[]) {
