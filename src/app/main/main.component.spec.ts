@@ -67,7 +67,7 @@ describe('MainComponent', () => {
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
   }));
 
-  it('should render user list with 4 elements', fakeAsync(() => {
+  it('should render user list with 4 elements', async(() => {
 
     const testUsers: User[] = [
       {id: 1, username: "Baz"},
@@ -85,5 +85,18 @@ describe('MainComponent', () => {
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
     expect(debugElements[3].nativeElement.textContent).toContain(testUsers[3].username);
   }));
+
+  it('should render user details', async(() => {
+    const testUsers: User[] = [
+      {id: 1, name: "name", username: "Baz", email: "test@gmail.com", phone: "+65 234 2394 2349"},
+    ];
+
+    mainComponent.users = testUsers;
+    fixture.detectChanges();
+    const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
+
+    expect(debugElements[0].nativeElement.textContent).toContain("name, Baz, test@gmail.com, +65 234 2394 2349");
+  }));
+
 });
 
