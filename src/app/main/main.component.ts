@@ -15,7 +15,10 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUsers()
-      .then(users => this.users = users);
+      .then(users => this.users = users)
+      .catch(() => {
+        throw "Error"
+      });
   }
 
   getUsersForTest(): User[] {
