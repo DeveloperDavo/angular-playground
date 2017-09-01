@@ -18,7 +18,7 @@ export class UserService {
   }
 
   setUsersForTest(users: User[]) {
-    // TODO: throw "This method should only be used for testing purposes"
+    throw "This method should only be accessed from the UserServiceFake";
   }
 
 }
