@@ -50,7 +50,7 @@ describe('MainComponent', () => {
     expect(mainComponent.getUsersForTest()).toBe(testUsers);
   }));
 
-  it('should render user list with 3 elements', async(() => {
+  it('should render user table with 3 elements', async(() => {
     const testUsers = [
       {id: 1, username: "Foo"},
       {id: 2, username: "Bar"},
@@ -61,13 +61,13 @@ describe('MainComponent', () => {
 
     fixture.detectChanges();
 
-    const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
+    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
     expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
   }));
 
-  it('should render user list with 4 elements', async(() => {
+  it('should render user table with 4 elements', async(() => {
 
     const testUsers: User[] = [
       {id: 1, username: "Baz"},
@@ -79,7 +79,7 @@ describe('MainComponent', () => {
     mainComponent.users = testUsers;
     fixture.detectChanges();
 
-    const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
+    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr'));
     expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
     expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
@@ -88,14 +88,17 @@ describe('MainComponent', () => {
 
   it('should render user details', async(() => {
     const testUsers: User[] = [
-      {id: 1, name: "name", username: "Baz", email: "test@gmail.com", phone: "+65 234 2394 2349"},
+      {id: 1, name: "name", username: "username", email: "test@gmail.com", phone: "+65 234 2394 2349"},
     ];
 
     mainComponent.users = testUsers;
     fixture.detectChanges();
-    const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
+    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr td'));
 
-    expect(debugElements[0].nativeElement.textContent).toContain("name, Baz, test@gmail.com, +65 234 2394 2349");
+    expect(debugElements[0].nativeElement.textContent).toContain("name");
+    expect(debugElements[1].nativeElement.textContent).toContain("username");
+    expect(debugElements[2].nativeElement.textContent).toContain("email");
+    expect(debugElements[3].nativeElement.textContent).toContain("phone");
   }));
 
 });

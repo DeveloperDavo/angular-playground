@@ -1,6 +1,19 @@
-<ul id="user-list">
-  <li *ngFor="let user of users">
-    {{user.name}}, {{user.username}}, {{user.email}}, {{user.phone}}
-  </li>
-</ul>
+<table id="user-table" class="table">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let user of users">
+  <tr>
+    <td>{{user.name}}</td>
+    <td>{{user.username}}</td>
+    <td>{{user.email}}</td>
+    <td>{{user.phone}}</td>
+  </tr>
+  </tbody>
+</table>
 
