@@ -88,7 +88,7 @@ describe('MainComponent', () => {
 
   it('should render user details', async(() => {
     const testUsers: User[] = [
-      {id: 1, name: "name", username: "username", email: "test@gmail.com", phone: "+65 234 2394 2349"},
+      {id: 1, name: "name", username: "username", email: "email", phone: "phone"},
     ];
 
     mainComponent.users = testUsers;
