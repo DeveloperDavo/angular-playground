@@ -1,12 +1,10 @@
-import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MainComponent} from './main.component';
 import {By} from "@angular/platform-browser";
 import {UserService} from "../user.service";
 import {User} from "../user";
 import {UserServiceFake} from "../user.service-fake";
-import {tick} from "@angular/core/testing";
-
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
@@ -34,7 +32,7 @@ describe('MainComponent', () => {
     expect(mainComponent).toBeTruthy();
   });
 
-  it('should get users from User service', fakeAsync(() => {
+  it('should get users from User service', async(() => {
     const testUsers = [
       {id: 1, username: "Foo"},
       {id: 2, username: "Bar"},
@@ -42,12 +40,13 @@ describe('MainComponent', () => {
     ];
 
     userService.setUsersForTest(testUsers);
-
-    fixture.detectChanges();
-    tick();
     fixture.detectChanges();
 
-    expect(mainComponent.users).toBe(testUsers);
+    fixture.whenStable().then(() => { // wait for async getQuote
+      fixture.detectChanges();        // update view with quote
+      expect(mainComponent.users).toBe(testUsers);
+    })
+
   }));
 
   it('should render user table with 3 elements', async(() => {
