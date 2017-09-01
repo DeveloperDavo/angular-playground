@@ -8,7 +8,7 @@ import {User} from "../user";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  private users: User[];
+  users: User[];
 
   constructor(private userService: UserService) {
   }
@@ -23,10 +23,6 @@ export class MainComponent implements OnInit {
 
   getUsersForTest(): User[] {
     return this.users;
-  }
-
-  setUsersForTest(users: User[]) {
-    this.users = users;
   }
 
 }

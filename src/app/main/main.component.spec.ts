@@ -57,7 +57,7 @@ describe('MainComponent', () => {
       {id: 3, username: "Baz"}
     ];
 
-    mainComponent.setUsersForTest(testUsers);
+    mainComponent.users = testUsers;
 
     fixture.detectChanges();
 
@@ -76,7 +76,7 @@ describe('MainComponent', () => {
       {id: 4, username: "Fizz"}
     ];
 
-    mainComponent.setUsersForTest(testUsers);
+    mainComponent.users = testUsers;
     fixture.detectChanges();
 
     const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
