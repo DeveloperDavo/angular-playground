@@ -9,7 +9,7 @@ import {tick} from "@angular/core/testing";
 
 
 describe('MainComponent', () => {
-  let component: MainComponent;
+  let mainComponent: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
   let userService: UserService;
 
@@ -24,17 +24,17 @@ describe('MainComponent', () => {
   beforeEach(() => {
 
     fixture = TestBed.createComponent(MainComponent);
-    component = fixture.componentInstance;
+    mainComponent = fixture.componentInstance;
 
     userService = fixture.debugElement.injector.get(UserService);
 
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
+    expect(mainComponent).toBeTruthy();
   });
 
-  it('should render user list with 3 elements', fakeAsync(() => {
+  it('should get users from User service', fakeAsync(() => {
     const testUsers = [
       {id: 1, username: "Foo"},
       {id: 2, username: "Bar"},
@@ -44,8 +44,21 @@ describe('MainComponent', () => {
     userService.setUsersForTest(testUsers);
 
     fixture.detectChanges();
-
     tick();
+    fixture.detectChanges();
+
+    expect(mainComponent.getUsersForTest()).toBe(testUsers);
+  }));
+
+  it('should render user list with 3 elements', async(() => {
+    const testUsers = [
+      {id: 1, username: "Foo"},
+      {id: 2, username: "Bar"},
+      {id: 3, username: "Baz"}
+    ];
+
+    mainComponent.setUsersForTest(testUsers);
+
     fixture.detectChanges();
 
     const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));
@@ -63,10 +76,7 @@ describe('MainComponent', () => {
       {id: 4, username: "Fizz"}
     ];
 
-    userService.setUsersForTest(testUsers);
-    fixture.detectChanges();
-
-    tick();
+    mainComponent.setUsersForTest(testUsers);
     fixture.detectChanges();
 
     const debugElements = fixture.debugElement.queryAll(By.css('#user-list li'));

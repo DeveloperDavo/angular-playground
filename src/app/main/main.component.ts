@@ -8,13 +8,22 @@ import {User} from "../user";
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  users: User[];
+  private users: User[];
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getUsers().then(users => this.users = users);
+    this.userService.getUsers()
+      .then(users => this.users = users);
+  }
+
+  getUsersForTest(): User[] {
+    return this.users;
+  }
+
+  setUsersForTest(users: User[]) {
+    this.users = users;
   }
 
 }
