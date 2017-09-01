@@ -10,6 +10,7 @@ describe('MainComponent', () => {
   let mainComponent: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
   let userService: UserService;
+  let spy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -39,13 +40,15 @@ describe('MainComponent', () => {
       {id: 3, username: "Baz"}
     ];
 
-    userService.setUsersForTest(testUsers);
+    spy = spyOn(userService, 'getUsers')
+      .and.returnValue(Promise.resolve(testUsers));
+
     fixture.detectChanges();
 
-    fixture.whenStable().then(() => { // wait for async getQuote
-      fixture.detectChanges();        // update view with quote
+    spy.calls.mostRecent().returnValue.then(() => {
+      fixture.detectChanges();
       expect(mainComponent.users).toBe(testUsers);
-    })
+    });
 
   }));
 
@@ -86,11 +89,10 @@ describe('MainComponent', () => {
   }));
 
   it('should render user details', async(() => {
-    const testUsers: User[] = [
+    mainComponent.users = [
       {id: 1, name: "name", username: "username", email: "email", phone: "phone"},
     ];
 
-    mainComponent.users = testUsers;
     fixture.detectChanges();
     const debugElements = fixture.debugElement.queryAll(By.css('tbody tr td'));
 

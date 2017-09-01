@@ -17,8 +17,4 @@ export class UserService {
     });
   }
 
-  setUsersForTest(users: User[]) {
-    throw "This method should only be accessed from the UserServiceFake!";
-  }
-
 }

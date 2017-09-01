@@ -17,14 +17,6 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should throw error when trying to modify users', inject([UserService], (userService: UserService) => {
-    const wrapper = function() {
-      userService.setUsersForTest([]);
-    };
-
-    expect(wrapper).toThrow("This method should only be accessed from the UserServiceFake!")
-  }));
-
   it('expects a GET request to api', inject([HttpClient, HttpTestingController, UserService],
     (http: HttpClient, httpMock: HttpTestingController, userService: UserService) => {
       userService.getUsers();
