@@ -47,7 +47,7 @@ describe('MainComponent', () => {
     tick();
     fixture.detectChanges();
 
-    expect(mainComponent.getUsersForTest()).toBe(testUsers);
+    expect(mainComponent.users).toBe(testUsers);
   }));
 
   it('should render user table with 3 elements', async(() => {

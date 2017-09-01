@@ -21,8 +21,4 @@ export class MainComponent implements OnInit {
       });
   }
 
-  getUsersForTest(): User[] {
-    return this.users;
-  }
-
 }
