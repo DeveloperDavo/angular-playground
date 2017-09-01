@@ -11,8 +11,8 @@ export class UserService {
 
   getUsers(): Promise<User[]> {
     return new Promise(res => {
-      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(() => {
-        res(MOCK_USERS);
+      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(users => {
+        res(users);
       });
     });
   }
