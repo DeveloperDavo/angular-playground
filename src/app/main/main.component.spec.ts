@@ -4,7 +4,7 @@ import {MainComponent} from './main.component';
 import {By} from "@angular/platform-browser";
 import {UserService} from "../user.service";
 import {User} from "../user";
-import {UserServiceFake} from "../user.service-fake";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
@@ -15,7 +15,10 @@ describe('MainComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MainComponent],
-      providers: [{provide: UserService, useClass: UserServiceFake}]
+      providers: [UserService],
+      imports: [
+        HttpClientTestingModule,
+      ],
     })
       .compileComponents();
   }));
