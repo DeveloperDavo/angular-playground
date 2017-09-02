@@ -9,7 +9,7 @@ import {DetailComponent} from "../detail/detail.component";
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
-  let fixture: ComponentFixture<MainComponent>;
+  let mainFixture: ComponentFixture<MainComponent>;
   let userService: UserService;
   let spy: jasmine.Spy;
 
@@ -26,10 +26,10 @@ describe('MainComponent', () => {
 
   beforeEach(() => {
 
-    fixture = TestBed.createComponent(MainComponent);
-    mainComponent = fixture.componentInstance;
+    mainFixture = TestBed.createComponent(MainComponent);
+    mainComponent = mainFixture.componentInstance;
 
-    userService = fixture.debugElement.injector.get(UserService);
+    userService = mainFixture.debugElement.injector.get(UserService);
 
   });
 
@@ -47,10 +47,10 @@ describe('MainComponent', () => {
     spy = spyOn(userService, 'getUsers')
       .and.returnValue(Promise.resolve(testUsers));
 
-    fixture.detectChanges();
+    mainFixture.detectChanges();
 
     spy.calls.mostRecent().returnValue.then(() => {
-      fixture.detectChanges();
+      mainFixture.detectChanges();
       expect(mainComponent.users).toBe(testUsers);
     });
 
@@ -65,9 +65,9 @@ describe('MainComponent', () => {
 
     mainComponent.users = testUsers;
 
-    fixture.detectChanges();
+    mainFixture.detectChanges();
 
-    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr'));
+    const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr'));
     expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
     expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
@@ -83,9 +83,9 @@ describe('MainComponent', () => {
     ];
 
     mainComponent.users = testUsers;
-    fixture.detectChanges();
+    mainFixture.detectChanges();
 
-    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr'));
+    const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr'));
     expect(debugElements[0].nativeElement.textContent).toContain(testUsers[0].username);
     expect(debugElements[1].nativeElement.textContent).toContain(testUsers[1].username);
     expect(debugElements[2].nativeElement.textContent).toContain(testUsers[2].username);
@@ -97,13 +97,32 @@ describe('MainComponent', () => {
       {id: 1, name: "name", username: "username", email: "email", phone: "phone"},
     ];
 
-    fixture.detectChanges();
-    const debugElements = fixture.debugElement.queryAll(By.css('tbody tr td'));
+    mainFixture.detectChanges();
+    const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr td'));
 
     expect(debugElements[0].nativeElement.textContent).toContain("name");
     expect(debugElements[1].nativeElement.textContent).toContain("username");
     expect(debugElements[2].nativeElement.textContent).toContain("email");
     expect(debugElements[3].nativeElement.textContent).toContain("phone");
+  }));
+
+  it('should set selectedUser upon row click', async(() => {
+
+    mainFixture.detectChanges();
+
+    const selectedTestUser = {id: 0, name: "Foo Bar", username: "foobar", email: "foobar@gmail.com", phone: "1234"};
+    mainComponent.users = [
+      selectedTestUser,
+      {id: 1, name: "name", username: "username", email: "email", phone: "phone"}
+    ];
+
+    mainFixture.detectChanges();
+    const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr'));
+
+    debugElements[0].nativeElement.click();
+
+    expect(mainComponent.selectedUser).toBe(selectedTestUser);
+
   }));
 
 });
