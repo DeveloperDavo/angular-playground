@@ -9,6 +9,7 @@ import {User} from "../user";
 })
 export class MainComponent implements OnInit {
   users: User[];
+  selectedUser: User;
 
   constructor(private userService: UserService) {
   }
@@ -19,6 +20,10 @@ export class MainComponent implements OnInit {
       .catch(() => {
         throw "Error"
       });
+  }
+
+  onSelect(user: User): void {
+    this.selectedUser = user;
   }
 
 }
