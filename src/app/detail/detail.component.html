@@ -1,3 +1,6 @@
-<div>
-  Bob
+<div *ngIf="user" id="user-details">
+  <div>name: {{user.name}}</div>
+  <div>username: {{user.username}}</div>
+  <div>email: {{user.email}}</div>
+  <div>phone: {{user.phone}}</div>
 </div>

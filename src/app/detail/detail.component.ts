@@ -7,5 +7,5 @@ import {User} from "../user";
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  user: User;
+  user: User = {id: 0, name: "Baz Bar", username: "bazbar", email: "bazbar@gmail.com", phone: "894"};
 }
