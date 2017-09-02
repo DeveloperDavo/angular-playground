@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DetailComponent } from './detail.component';
+import {By} from "@angular/platform-browser";
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
@@ -22,4 +23,12 @@ describe('DetailComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render "Bob"', async(() => {
+    component.user = {id: 0, username: "Bob"};
+
+    const debugElement = fixture.debugElement.query(By.css('div'));
+
+    expect(debugElement.nativeElement.textContent).toContain("Bob");
+  }));
 });
