@@ -17,9 +17,7 @@ describe('MainComponent', () => {
     TestBed.configureTestingModule({
       declarations: [MainComponent, DetailComponent],
       providers: [UserService],
-      imports: [
-        HttpClientTestingModule,
-      ],
+      imports: [HttpClientTestingModule],
     })
       .compileComponents();
   }));
@@ -31,6 +29,8 @@ describe('MainComponent', () => {
 
     userService = mainFixture.debugElement.injector.get(UserService);
 
+    spy = spyOn(userService, 'getUsers');
+    setSpyReturnValue()
   });
 
   it('should be created', () => {
@@ -44,8 +44,8 @@ describe('MainComponent', () => {
       {id: 3, username: "Baz"}
     ];
 
-    spy = spyOn(userService, 'getUsers')
-      .and.returnValue(Promise.resolve(testUsers));
+    // override return value
+    setSpyReturnValue(testUsers);
 
     mainFixture.detectChanges();
 
@@ -107,9 +107,6 @@ describe('MainComponent', () => {
   }));
 
   it('should set selectedUser upon row click', async(() => {
-
-    mainFixture.detectChanges();
-
     const selectedTestUser = {id: 0, name: "Foo Bar", username: "foobar", email: "foobar@gmail.com", phone: "1234"};
     mainComponent.users = [
       selectedTestUser,
@@ -124,6 +121,10 @@ describe('MainComponent', () => {
     expect(mainComponent.selectedUser).toBe(selectedTestUser);
 
   }));
+
+  function setSpyReturnValue(stub:User[] = []) {
+    spy.and.returnValue(Promise.resolve(stub));
+  }
 
 });
 
