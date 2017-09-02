@@ -7,7 +7,7 @@
     <th>Phone</th>
   </tr>
   </thead>
-  <tbody *ngFor="let user of users" (click)="onSelect(user)">
+  <tbody *ngFor="let user of users">
   <tr>
     <td>{{user.name}}</td>
     <td>{{user.username}}</td>
@@ -16,5 +16,4 @@
   </tr>
   </tbody>
 </table>
-<app-detail [user]="selectedUser"></app-detail>
 
