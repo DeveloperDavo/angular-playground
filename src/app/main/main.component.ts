@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../user.service";
-import {User} from "../user";
+import {UserService} from '../user.service';
+import {User} from '../user';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
     this.userService.getUsers()
       .then(users => this.users = users)
       .catch(() => {
-        throw "Error"
+        throw new Error('Error');
       });
   }
 

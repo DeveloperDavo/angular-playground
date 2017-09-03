@@ -1,11 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {MainComponent} from './main.component';
-import {By} from "@angular/platform-browser";
-import {UserService} from "../user.service";
-import {User} from "../user";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {DetailComponent} from "../detail/detail.component";
+import {By} from '@angular/platform-browser';
+import {UserService} from '../user.service';
+import {User} from '../user';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {DetailComponent} from '../detail/detail.component';
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
@@ -39,9 +39,9 @@ describe('MainComponent', () => {
     ngOnInitSpy.and.callThrough();
 
     const testUsers = [
-      {id: 1, username: "Foo"},
-      {id: 2, username: "Bar"},
-      {id: 3, username: "Baz"}
+      {id: 1, username: 'Foo'},
+      {id: 2, username: 'Bar'},
+      {id: 3, username: 'Baz'}
     ];
 
     const spy = spyOn(userService, 'getUsers')
@@ -58,9 +58,9 @@ describe('MainComponent', () => {
 
   it('should render user table with 3 elements', async(() => {
     const testUsers = [
-      {id: 1, username: "Foo"},
-      {id: 2, username: "Bar"},
-      {id: 3, username: "Baz"}
+      {id: 1, username: 'Foo'},
+      {id: 2, username: 'Bar'},
+      {id: 3, username: 'Baz'}
     ];
 
     mainComponent.users = testUsers;
@@ -75,10 +75,10 @@ describe('MainComponent', () => {
 
   it('should render user table with 4 elements', async(() => {
     const testUsers: User[] = [
-      {id: 1, username: "Baz"},
-      {id: 2, username: "Foo"},
-      {id: 3, username: "Bar"},
-      {id: 4, username: "Fizz"}
+      {id: 1, username: 'Baz'},
+      {id: 2, username: 'Foo'},
+      {id: 3, username: 'Bar'},
+      {id: 4, username: 'Fizz'}
     ];
 
     mainComponent.users = testUsers;
@@ -93,23 +93,23 @@ describe('MainComponent', () => {
 
   it('should render user details', async(() => {
     mainComponent.users = [
-      {id: 1, name: "name", username: "username", email: "email", phone: "phone"},
+      {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'},
     ];
 
     mainFixture.detectChanges();
     const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr td'));
 
-    expect(debugElements[0].nativeElement.textContent).toContain("name");
-    expect(debugElements[1].nativeElement.textContent).toContain("username");
-    expect(debugElements[2].nativeElement.textContent).toContain("email");
-    expect(debugElements[3].nativeElement.textContent).toContain("phone");
+    expect(debugElements[0].nativeElement.textContent).toContain('name');
+    expect(debugElements[1].nativeElement.textContent).toContain('username');
+    expect(debugElements[2].nativeElement.textContent).toContain('email');
+    expect(debugElements[3].nativeElement.textContent).toContain('phone');
   }));
 
   it('should set selectedUser upon row click', async(() => {
-    const selectedTestUser = {id: 0, name: "Foo Bar", username: "foobar", email: "foobar@gmail.com", phone: "1234"};
+    const selectedTestUser = {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'};
     mainComponent.users = [
       selectedTestUser,
-      {id: 1, name: "name", username: "username", email: "email", phone: "phone"}
+      {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'}
     ];
 
     mainFixture.detectChanges();
