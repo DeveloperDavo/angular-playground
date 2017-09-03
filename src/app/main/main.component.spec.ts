@@ -11,6 +11,7 @@ describe('MainComponent', () => {
   let mainComponent: MainComponent;
   let mainFixture: ComponentFixture<MainComponent>;
   let userService: UserService;
+  let ngOnInitSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,20 +23,21 @@ describe('MainComponent', () => {
   }));
 
   beforeEach(() => {
-
     mainFixture = TestBed.createComponent(MainComponent);
     mainComponent = mainFixture.componentInstance;
 
     userService = mainFixture.debugElement.injector.get(UserService);
 
+    ngOnInitSpy = spyOn(mainComponent, 'ngOnInit');
   });
 
   it('should be created', () => {
-    spyOnNgOnInit();
     expect(mainComponent).toBeTruthy();
   });
 
   it('should get users from User service', async(() => {
+    ngOnInitSpy.and.callThrough();
+
     const testUsers = [
       {id: 1, username: "Foo"},
       {id: 2, username: "Bar"},
@@ -55,8 +57,6 @@ describe('MainComponent', () => {
   }));
 
   it('should render user table with 3 elements', async(() => {
-    spyOnNgOnInit();
-
     const testUsers = [
       {id: 1, username: "Foo"},
       {id: 2, username: "Bar"},
@@ -74,8 +74,6 @@ describe('MainComponent', () => {
   }));
 
   it('should render user table with 4 elements', async(() => {
-    spyOnNgOnInit();
-
     const testUsers: User[] = [
       {id: 1, username: "Baz"},
       {id: 2, username: "Foo"},
@@ -94,8 +92,6 @@ describe('MainComponent', () => {
   }));
 
   it('should render user details', async(() => {
-    spyOnNgOnInit();
-
     mainComponent.users = [
       {id: 1, name: "name", username: "username", email: "email", phone: "phone"},
     ];
@@ -110,8 +106,6 @@ describe('MainComponent', () => {
   }));
 
   it('should set selectedUser upon row click', async(() => {
-    spyOnNgOnInit();
-
     const selectedTestUser = {id: 0, name: "Foo Bar", username: "foobar", email: "foobar@gmail.com", phone: "1234"};
     mainComponent.users = [
       selectedTestUser,
@@ -124,11 +118,5 @@ describe('MainComponent', () => {
     debugElements[0].nativeElement.click();
 
     expect(mainComponent.selectedUser).toBe(selectedTestUser);
-
   }));
-
-  function spyOnNgOnInit(): void {
-    spyOn(mainComponent, 'ngOnInit');
-  }
-
 });
