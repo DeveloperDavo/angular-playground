@@ -17,9 +17,8 @@ describe('e2e', () => {
   }
 
   function shouldDisplayUsers() {
-    const allTrElements = page.getAllTrElements();
-    expect(allTrElements.count()).toEqual(11);
-    expect(page.getAllTdElementsInIth(allTrElements, 1).count()).toEqual(4);
+    expect(page.getAllTrElements().count()).toEqual(11);
+    expect(page.getAllTdElementsInIthTr(1).count()).toEqual(4);
   }
 
 });

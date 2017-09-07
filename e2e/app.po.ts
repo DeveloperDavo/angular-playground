@@ -13,8 +13,8 @@ export class AppPage {
     return element.all(by.css('app-main tr'));
   }
 
-  getAllTdElementsInIth(elements: ElementArrayFinder, index) {
-    return elements.get(index).all(by.css('td'));
+  getAllTdElementsInIthTr(index) {
+    return this.getAllTrElements().get(index).all(by.css('td'));
   }
 
 }
