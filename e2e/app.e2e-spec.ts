@@ -19,8 +19,7 @@ describe('e2e', () => {
   function shouldDisplayUsers() {
     expect(page.getAllTrElements().count()).toEqual(11);
     expect(page.getAllTdElementsInIthTr(1).count()).toEqual(4);
-    const firstNameInTable = page.getAllTdElementsInIthTr(1).get(0).getText();
-    expect(firstNameInTable).toEqual('Leanne Graham');
+    expect(page.getTextOfColumnInRow(1, 0)).toEqual('Leanne Graham');
   }
 
 });

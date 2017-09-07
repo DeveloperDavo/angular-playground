@@ -13,8 +13,13 @@ export class AppPage {
     return element.all(by.css('app-main tr'));
   }
 
-  getAllTdElementsInIthTr(index) {
+  getAllTdElementsInIthTr(index: number) {
     return this.getAllTrElements().get(index).all(by.css('td'));
   }
+
+  getTextOfColumnInRow(rowIndex: number, columnIndex: number) {
+    return this.getAllTdElementsInIthTr(rowIndex).get(columnIndex).getText();
+  }
+
 
 }
