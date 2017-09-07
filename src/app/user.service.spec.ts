@@ -17,14 +17,13 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('expects a GET request to api', inject([HttpClient, HttpTestingController, UserService],
-    (http: HttpClient, httpMock: HttpTestingController, userService: UserService) => {
+  it('expects a GET request to api', inject([HttpClient, UserService],
+    (http: HttpClient, userService: UserService) => {
+      spyOn(http, 'get');
+
       userService.getUsers();
 
-      const req = httpMock.expectOne('https://jsonplaceholder.typicode.com/users');
-
-      expect(req.request.method).toEqual('GET');
-
-      httpMock.verify();
+      expect(http.get).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/users');
     }));
+
 });
