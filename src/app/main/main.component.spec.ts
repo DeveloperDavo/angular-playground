@@ -44,7 +44,7 @@ describe('MainComponent', () => {
       {id: 3, username: 'Baz'}
     ];
 
-    const spy = spyOn(userService, 'getUsers')
+    const spy = spyOn(userService, 'getUserPromise')
       .and.returnValue(Promise.resolve(testUsers));
 
     mainFixture.detectChanges();

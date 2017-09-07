@@ -8,7 +8,7 @@ export class UserService {
   constructor(public http: HttpClient) {
   }
 
-  getUsers(): Promise<User[]> {
+  getUserPromise(): Promise<User[]> {
     return new Promise(res => {
       this.http.get('https://jsonplaceholder.typicode.com/users')
         .subscribe(users => {
