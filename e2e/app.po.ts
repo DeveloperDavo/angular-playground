@@ -9,16 +9,16 @@ export class AppPage {
     return element(by.css('app-root h1')).getText();
   }
 
-  getAllTrElements(): ElementArrayFinder {
-    return element.all(by.css('app-main tr'));
+  getTextOfColumnInRow(rowIndex: number, columnIndex: number) {
+    return this.getAllTdElementsInIthTr(rowIndex).get(columnIndex).getText();
   }
 
-  getAllTdElementsInIthTr(index: number) {
+  private getAllTdElementsInIthTr(index: number) {
     return this.getAllTrElements().get(index).all(by.css('td'));
   }
 
-  getTextOfColumnInRow(rowIndex: number, columnIndex: number) {
-    return this.getAllTdElementsInIthTr(rowIndex).get(columnIndex).getText();
+  private getAllTrElements(): ElementArrayFinder {
+    return element.all(by.css('app-main tr'));
   }
 
 

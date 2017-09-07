@@ -9,7 +9,6 @@ describe('e2e', () => {
     shouldDisplayWelcomeToApp();
 
     shouldDisplayUsers();
-
   });
 
   function shouldDisplayWelcomeToApp() {
@@ -17,9 +16,10 @@ describe('e2e', () => {
   }
 
   function shouldDisplayUsers() {
-    expect(page.getAllTrElements().count()).toEqual(11);
-    expect(page.getAllTdElementsInIthTr(1).count()).toEqual(4);
     expect(page.getTextOfColumnInRow(1, 0)).toEqual('Leanne Graham');
+    expect(page.getTextOfColumnInRow(3, 1)).toEqual('Samantha');
+    expect(page.getTextOfColumnInRow(6, 2)).toEqual('Karley_Dach@jasper.info');
+    expect(page.getTextOfColumnInRow(9, 3)).toEqual('(775)976-6794 x41206');
   }
 
 });
