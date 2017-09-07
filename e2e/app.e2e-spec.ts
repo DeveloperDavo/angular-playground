@@ -1,14 +1,23 @@
-import { AppPage } from './app.po';
+import {AppPage} from './app.po';
 
-describe('users App', () => {
-  let page: AppPage;
+describe('e2e', () => {
+  const page = new AppPage();
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
-
-  it('should display welcome message', () => {
+  it('user journey', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+
+    shouldDisplayWelcomeToApp();
+
+    shouldDisplayUsers();
+
   });
+
+  function shouldDisplayWelcomeToApp() {
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
+  }
+
+  function shouldDisplayUsers() {
+    expect(page.getAllTrElements().count()).toEqual(11);
+  }
+
 });

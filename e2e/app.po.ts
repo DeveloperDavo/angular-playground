@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import {browser, by, element, ElementArrayFinder} from 'protractor';
 
 export class AppPage {
   navigateTo() {
@@ -8,4 +8,9 @@ export class AppPage {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getAllTrElements(): ElementArrayFinder {
+    return element.all(by.css('app-main tr'));
+  }
+
 }
