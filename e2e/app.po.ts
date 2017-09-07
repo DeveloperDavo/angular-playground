@@ -13,8 +13,12 @@ export class AppPage {
     return this.getAllTdElementsInIthTr(rowIndex).get(columnIndex).getText();
   }
 
+  getRow(index: number) {
+    return this.getAllTrElements().get(index);
+  }
+
   private getAllTdElementsInIthTr(index: number) {
-    return this.getAllTrElements().get(index).all(by.css('td'));
+    return this.getRow(index).all(by.css('td'));
   }
 
   private getAllTrElements(): ElementArrayFinder {
@@ -22,4 +26,7 @@ export class AppPage {
   }
 
 
+  getNameOfUserDetails() {
+    return element(by.css('#user-details-name')).getText();
+  }
 }

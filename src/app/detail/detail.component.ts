@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {User} from '../user';
 
 @Component({
@@ -7,5 +7,5 @@ import {User} from '../user';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  user: User = {id: 0, name: 'Baz Bar', username: 'bazbar', email: 'bazbar@gmail.com', phone: '894'};
+  @Input() user: User;
 }
