@@ -7,7 +7,9 @@
     <th>Phone</th>
   </tr>
   </thead>
-  <tbody *ngFor="let user of users" (click)="onSelect(user)">
+  <tbody *ngFor="let user of users"
+         (click)="onSelect(user)"
+         [class.selected]="user === selectedUser">
   <tr>
     <td>{{user.name}}</td>
     <td>{{user.username}}</td>

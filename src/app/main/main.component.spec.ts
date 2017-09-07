@@ -121,5 +121,20 @@ describe('MainComponent', () => {
       expect(debugElements[2].nativeElement.textContent).toContain('email');
       expect(debugElements[3].nativeElement.textContent).toContain('phone');
     }));
+
+    it('selected row style upon row click', async(() => {
+      mainComponent.users = [
+        {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'},
+        {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'}
+      ];
+      mainFixture.detectChanges();
+
+      const debugElements = mainFixture.debugElement.queryAll(By.css('tbody tr'));
+      debugElements[0].nativeElement.click();
+      mainFixture.detectChanges();
+
+      const debugElement = mainFixture.debugElement.query(By.css('tbody'));
+      expect(debugElement.classes.selected).toBe(true);
+    }));
   });
 });
