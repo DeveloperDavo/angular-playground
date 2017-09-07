@@ -1,29 +1,19 @@
-import {TestBed, inject} from '@angular/core/testing';
 import {UserService} from './user.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import createSpyObj = jasmine.createSpyObj;
+import 'rxjs/add/observable/never';
 
 describe('UserService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [UserService],
-      imports: [
-        HttpClientTestingModule,
-      ],
-    });
+  it('expects a GET request to api', () => {
+    const http = createSpyObj('httpClient', ['get']);
+    const userService = new UserService(http);
+
+    http.get.and.returnValue(Observable.never());
+
+    userService.getUsers();
+
+    expect(http.get).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/users');
   });
-
-  it('should be created', inject([UserService], (service: UserService) => {
-    expect(service).toBeTruthy();
-  }));
-
-  it('expects a GET request to api', inject([HttpClient, UserService],
-    (http: HttpClient, userService: UserService) => {
-      spyOn(http, 'get');
-
-      userService.getUsers();
-
-      expect(http.get).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/users');
-    }));
 
 });
