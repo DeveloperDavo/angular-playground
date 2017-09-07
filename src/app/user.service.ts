@@ -10,9 +10,10 @@ export class UserService {
 
   getUsers(): Promise<User[]> {
     return new Promise(res => {
-      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(users => {
-        res(users);
-      });
+      this.http.get('https://jsonplaceholder.typicode.com/users')
+        .subscribe(users => {
+          res(users);
+        });
     });
   }
 
