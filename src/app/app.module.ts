@@ -6,6 +6,7 @@ import {MainComponent} from './main/main.component';
 import {UserService} from './user.service';
 import {HttpClientModule} from '@angular/common/http';
 import { DetailComponent } from './detail/detail.component';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { DetailComponent } from './detail/detail.component';
     DetailComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule
   ],

@@ -8,4 +8,8 @@ import {User} from '../user';
 })
 export class DetailComponent {
   @Input() user: User;
+
+  onSubmit() {
+    console.log('submitted');
+  }
 }
