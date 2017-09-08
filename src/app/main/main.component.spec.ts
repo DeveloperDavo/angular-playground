@@ -5,7 +5,12 @@ import {By} from '@angular/platform-browser';
 import {UserService} from '../user.service';
 import {User} from '../user';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {DetailComponent} from '../detail/detail.component';
+import {Component, Input} from '@angular/core';
+
+@Component({selector: 'app-detail', template: ''})
+class DetailStubComponent {
+  @Input() user: User;
+}
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
@@ -15,7 +20,7 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, DetailComponent],
+      declarations: [MainComponent, DetailStubComponent],
       providers: [UserService],
       imports: [HttpClientTestingModule],
     })
