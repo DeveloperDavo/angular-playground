@@ -33,19 +33,13 @@ describe('DetailComponent', () => {
 
     fixture.detectChanges();
     tick();
+    page = new Page();
     fixture.detectChanges();
 
-    const inputNameEl = fixture.debugElement.query(By.css('#input-name')).nativeElement;
-    updateInputField(inputNameEl, 'Tom');
-
-    const inputUsernameEl = fixture.debugElement.query(By.css('#input-username')).nativeElement;
-    updateInputField(inputUsernameEl, 'Tommy');
-
-    const inputEmailEl = fixture.debugElement.query(By.css('#input-email')).nativeElement;
-    updateInputField(inputEmailEl, 'tommy@gmail.com');
-
-    const inputPhoneEl = fixture.debugElement.query(By.css('#input-phone')).nativeElement;
-    updateInputField(inputPhoneEl, '5678');
+    updateInputField(page.inputName.nativeElement, 'Tom');
+    updateInputField(page.inputUsername.nativeElement, 'Tommy');
+    updateInputField(page.inputEmail.nativeElement, 'tommy@gmail.com');
+    updateInputField(page.inputPhone.nativeElement, '5678');
 
     const user = component.user;
     expect(user.name).toBe('Tom');
@@ -68,19 +62,40 @@ describe('DetailComponent', () => {
     page = new Page();
     fixture.detectChanges();
 
-    expect(page.inputName.nativeElement.value).toBe('Foo Bar');
-    expect(fixture.debugElement.query(By.css('#input-username')).nativeElement.value).toBe('foobar');
-    expect(fixture.debugElement.query(By.css('#input-email')).nativeElement.value).toBe('foobar@gmail.com');
-    expect(fixture.debugElement.query(By.css('#input-phone')).nativeElement.value).toBe('1234');
+    expect(page.getNameValue()).toBe('Foo Bar');
+    expect(page.getUsernameValue()).toBe('foobar');
+    expect(page.getEmailValue()).toBe('foobar@gmail.com');
+    expect(page.getPhoneValue()).toBe('1234');
 
   }));
 });
 
 class Page {
   inputName: DebugElement;
+  inputUsername: DebugElement;
+  inputEmail: DebugElement;
+  inputPhone: DebugElement;
 
   constructor() {
     this.inputName = fixture.debugElement.query(By.css('#input-name'));
+    this.inputUsername = fixture.debugElement.query(By.css('#input-username'));
+    this.inputEmail = fixture.debugElement.query(By.css('#input-email'));
+    this.inputPhone = fixture.debugElement.query(By.css('#input-phone'));
   }
 
+  getNameValue() {
+    return this.inputName.nativeElement.value;
+  }
+
+  getUsernameValue() {
+    return this.inputUsername.nativeElement.value;
+  }
+
+  getEmailValue() {
+    return this.inputEmail.nativeElement.value;
+  }
+
+  getPhoneValue() {
+    return this.inputPhone.nativeElement.value;
+  }
 }
