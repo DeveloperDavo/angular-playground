@@ -5,9 +5,11 @@ import {By} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 
+let fixture: ComponentFixture<DetailComponent>;
+
 describe('DetailComponent', () => {
   let component: DetailComponent;
-  let fixture: ComponentFixture<DetailComponent>;
+  let page: Page;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,13 +65,22 @@ describe('DetailComponent', () => {
 
     fixture.detectChanges();
     tick();
+    page = new Page();
     fixture.detectChanges();
 
-    const debugElement = fixture.debugElement;
-    expect(debugElement.query(By.css('#input-name')).nativeElement.value).toBe('Foo Bar');
-    expect(debugElement.query(By.css('#input-username')).nativeElement.value).toBe('foobar');
-    expect(debugElement.query(By.css('#input-email')).nativeElement.value).toBe('foobar@gmail.com');
-    expect(debugElement.query(By.css('#input-phone')).nativeElement.value).toBe('1234');
+    expect(page.inputName.nativeElement.value).toBe('Foo Bar');
+    expect(fixture.debugElement.query(By.css('#input-username')).nativeElement.value).toBe('foobar');
+    expect(fixture.debugElement.query(By.css('#input-email')).nativeElement.value).toBe('foobar@gmail.com');
+    expect(fixture.debugElement.query(By.css('#input-phone')).nativeElement.value).toBe('1234');
 
   }));
 });
+
+class Page {
+  inputName: DebugElement;
+
+  constructor() {
+    this.inputName = fixture.debugElement.query(By.css('#input-name'));
+  }
+
+}
