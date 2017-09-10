@@ -61,7 +61,6 @@ describe('MainComponent', () => {
 
   }));
 
-
   it('should set selectedUser upon row click', async(() => {
     const selectedTestUser = {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'};
     mainComponent.users = [
@@ -75,6 +74,24 @@ describe('MainComponent', () => {
     debugElements[0].nativeElement.click();
 
     expect(mainComponent.selectedUser).toBe(selectedTestUser);
+  }));
+
+  it('should delete user upon button click', async(() => {
+    const testUsers = [
+      {id: 1, username: 'Foo'},
+      {id: 2, username: 'Bar'},
+      {id: 3, username: 'Baz'}
+    ];
+
+    mainComponent.users = testUsers;
+    mainFixture.detectChanges();
+
+    const dDelButtons = mainFixture.debugElement.queryAll(By.css('#delete-button'));
+    dDelButtons[1].nativeElement.click();
+    mainFixture.detectChanges();
+
+    expect(mainComponent.users[0]).toBe(testUsers[0]);
+    expect(mainComponent.users[1]).toBe(testUsers[2]);
   }));
 
   describe('should render', () => {

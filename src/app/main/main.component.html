@@ -15,6 +15,11 @@
     <td>{{user.username}}</td>
     <td>{{user.email}}</td>
     <td>{{user.phone}}</td>
+    <td>
+      <button id="delete-button" class="btn btn-danger"
+              (click)="onDelete(user)">Delete
+      </button>
+    </td>
   </tr>
   </tbody>
 </table>
