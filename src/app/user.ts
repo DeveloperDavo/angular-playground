@@ -21,3 +21,13 @@ export interface User {
     bs: string
   };
 }
+
+export class User implements User {
+  id: number;
+  username: string;
+
+  constructor(id: number, username: string) {
+    this.id = id;
+    this.username = username;
+  }
+}

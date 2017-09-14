@@ -95,6 +95,21 @@ describe('MainComponent', () => {
     expect(mainComponent.users[1]).toBe(testUsers[2]);
   }));
 
+  it('should add user upon button click', fakeAsync(() => {
+    mainComponent.users = [
+      {id: 1, username: 'Foo'},
+      {id: 2, username: 'Bar'},
+      {id: 3, username: 'Baz'}
+    ];
+
+    setUpPageObject();
+
+    page.getAddButtonElement().click();
+    mainFixture.detectChanges();
+
+    expect(mainComponent.users.length).toBe(4);
+  }));
+
   describe('should render', () => {
     it('user table with 3 elements', fakeAsync(() => {
       const testUsers = [
@@ -171,12 +186,14 @@ class Page {
   tableRows: DebugElement[];
   tableRowColumns: DebugElement[];
   deleteButtons: DebugElement[];
+  addButton: DebugElement;
 
   constructor() {
     this.tableBody = mainFixture.debugElement.query(By.css('tbody'));
     this.tableRows = mainFixture.debugElement.queryAll(By.css('tbody tr'));
     this.tableRowColumns = mainFixture.debugElement.queryAll(By.css('tbody tr td'));
     this.deleteButtons = mainFixture.debugElement.queryAll(By.css('#delete-button'));
+    this.addButton = mainFixture.debugElement.query(By.css('#add-button'));
   }
 
   getRowElement(index: number) {
@@ -197,5 +214,9 @@ class Page {
 
   getDeleteButtonElement(index: number) {
     return this.deleteButtons[index].nativeElement;
+  }
+
+  getAddButtonElement() {
+    return this.addButton.nativeElement;
   }
 }
