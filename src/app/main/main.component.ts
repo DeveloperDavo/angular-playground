@@ -28,7 +28,9 @@ export class MainComponent implements OnInit {
 
   onDelete(userToDelete: User, event: Event): void {
     this.users = this.users.filter(user => user !== userToDelete);
-    this.selectedUser = undefined;
+    if (this.selectedUser === userToDelete) {
+      this.selectedUser = undefined;
+    }
     event.stopImmediatePropagation();
   }
 

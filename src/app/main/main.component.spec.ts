@@ -113,6 +113,25 @@ describe('MainComponent', () => {
     expect(mainComponent.selectedUser).toBeUndefined();
   }));
 
+  it('expects selected user to remain selected after deleting another user', fakeAsync(() => {
+    const testUser = {id: 2, username: 'Bar'};
+    mainComponent.users = [
+      {id: 1, username: 'Foo'},
+      testUser,
+      {id: 3, username: 'Baz'}
+    ];
+
+    setUpPageObject();
+
+    page.getRowElement(1).click();
+    mainFixture.detectChanges();
+
+    page.getDeleteButtonElement(2).click();
+    mainFixture.detectChanges();
+
+    expect(mainComponent.selectedUser).toBe(testUser);
+  }));
+
   it('should add user upon button click', fakeAsync(() => {
     mainComponent.users = [
       {id: 1, username: 'Foo'},
