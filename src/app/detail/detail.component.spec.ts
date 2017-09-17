@@ -6,10 +6,17 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 
 let fixture: ComponentFixture<DetailComponent>;
+let page: Page;
+
+function setUpPage() {
+  fixture.detectChanges();
+  tick();
+  page = new Page();
+  fixture.detectChanges();
+}
 
 describe('DetailComponent', () => {
   let component: DetailComponent;
-  let page: Page;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,10 +38,7 @@ describe('DetailComponent', () => {
   it('should edit user\'s details', fakeAsync(() => {
     component.user = {id: 0, name: 'Bob', username: 'Bobby', email: 'bobby@gmail.com', phone: '1234'};
 
-    fixture.detectChanges();
-    tick();
-    page = new Page();
-    fixture.detectChanges();
+    setUpPage();
 
     updateInputField(page.inputName.nativeElement, 'Tom');
     updateInputField(page.inputUsername.nativeElement, 'Tommy');
@@ -57,11 +61,7 @@ describe('DetailComponent', () => {
   it('should render user\'s details', fakeAsync(() => {
     component.user = {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'};
 
-    fixture.detectChanges();
-    tick();
-    page = new Page();
-    fixture.detectChanges();
-    console.log(page);
+    setUpPage();
 
     expect(page.getNameValue()).toBe('Foo Bar');
     expect(page.getUsernameValue()).toBe('foobar');
