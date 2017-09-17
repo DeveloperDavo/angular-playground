@@ -8,7 +8,7 @@ export interface User {
     suite: string
     city: string
     zipcode: string
-    geo: {
+    geo?: {
       lat: number
       lng: number
     }

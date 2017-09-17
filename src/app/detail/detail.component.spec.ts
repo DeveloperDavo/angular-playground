@@ -67,7 +67,20 @@ describe('DetailComponent', () => {
     expect(page.getUsernameValue()).toBe('foobar');
     expect(page.getEmailValue()).toBe('foobar@gmail.com');
     expect(page.getPhoneValue()).toBe('1234');
+  }));
 
+  it('should render user\'s street', fakeAsync(() => {
+    component.user = {id: 0, username: 'foobar2'};
+    component.user.address = {
+      street: 'street',
+      suite: 'suite',
+      city: 'city',
+      zipcode: 'zipcode'
+    };
+
+    setUpPage();
+
+    expect(page.getStreetValue()).toBe('street');
   }));
 });
 
@@ -76,12 +89,14 @@ class Page {
   inputUsername: DebugElement;
   inputEmail: DebugElement;
   inputPhone: DebugElement;
+  inputStreet: DebugElement;
 
   constructor() {
     this.inputName = fixture.debugElement.query(By.css('#input-name'));
     this.inputUsername = fixture.debugElement.query(By.css('#input-username'));
     this.inputEmail = fixture.debugElement.query(By.css('#input-email'));
     this.inputPhone = fixture.debugElement.query(By.css('#input-phone'));
+    this.inputStreet = fixture.debugElement.query(By.css('#input-street'));
   }
 
   getNameValue() {
@@ -98,5 +113,9 @@ class Page {
 
   getPhoneValue() {
     return this.inputPhone.nativeElement.value;
+  }
+
+  getStreetValue() {
+    return this.inputStreet.nativeElement.value;
   }
 }

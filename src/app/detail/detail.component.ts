@@ -13,6 +13,9 @@ export class DetailComponent {
     name: new FormControl(),
     username: new FormControl(),
     email: new FormControl(),
-    phone: new FormControl()
+    phone: new FormControl(),
+    address: new FormGroup({
+      street: new FormControl(),
+    })
   });
 }
