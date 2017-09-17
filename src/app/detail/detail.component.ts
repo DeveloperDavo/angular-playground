@@ -16,6 +16,8 @@ export class DetailComponent {
     phone: new FormControl(),
     address: new FormGroup({
       street: new FormControl(),
+      city: new FormControl(),
+      zipcode: new FormControl()
     })
   });
 }

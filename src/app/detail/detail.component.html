@@ -28,10 +28,24 @@
       <div *ngIf="user.address">
         <h4>Address</h4>
         <div formGroupName="address">
-          <label for="input-street">Street</label>
-          <input type="text" class="form-control" id="input-street"
-                 [(ngModel)]="user.address.street" name="street"
-                 formControlName="street">
+          <div>
+            <label for="input-street">Street</label>
+            <input type="text" class="form-control" id="input-street"
+                   [(ngModel)]="user.address.street" name="street"
+                   formControlName="street">
+          </div>
+          <div>
+            <label for="input-city">City</label>
+            <input type="text" class="form-control" id="input-city"
+                   [(ngModel)]="user.address.city" name="city"
+                   formControlName="city">
+          </div>
+          <div>
+            <label for="input-zipcode">Zipcode</label>
+            <input type="text" class="form-control" id="input-zipcode"
+                   [(ngModel)]="user.address.zipcode" name="zipcode"
+                   formControlName="zipcode">
+          </div>
         </div>
       </div>
     </div>

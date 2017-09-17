@@ -69,11 +69,10 @@ describe('DetailComponent', () => {
     expect(page.getPhoneValue()).toBe('1234');
   }));
 
-  it('should render user\'s street', fakeAsync(() => {
+  it('should render user\'s address', fakeAsync(() => {
     component.user = {id: 0, username: 'foobar2'};
     component.user.address = {
       street: 'street',
-      suite: 'suite',
       city: 'city',
       zipcode: 'zipcode'
     };
@@ -90,6 +89,8 @@ class Page {
   inputEmail: DebugElement;
   inputPhone: DebugElement;
   inputStreet: DebugElement;
+  inputCity: DebugElement;
+  inputZipcode: DebugElement;
 
   constructor() {
     this.inputName = fixture.debugElement.query(By.css('#input-name'));
@@ -97,6 +98,8 @@ class Page {
     this.inputEmail = fixture.debugElement.query(By.css('#input-email'));
     this.inputPhone = fixture.debugElement.query(By.css('#input-phone'));
     this.inputStreet = fixture.debugElement.query(By.css('#input-street'));
+    this.inputCity = fixture.debugElement.query(By.css('#input-city'));
+    this.inputZipcode = fixture.debugElement.query(By.css('#input-zipcode'));
   }
 
   getNameValue() {
