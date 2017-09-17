@@ -15,11 +15,27 @@ class DetailStubComponent {
 }
 
 let mainFixture: ComponentFixture<MainComponent>;
+let page: Page;
+
+function clickRow(index: number) {
+  page.getRowElement(index).click();
+  mainFixture.detectChanges();
+}
+
+function clickDelete(index: number) {
+  page.getDeleteButtonElement(index).click();
+  mainFixture.detectChanges();
+}
+
+function clickAdd() {
+  page.getAddButtonElement().click();
+  mainFixture.detectChanges();
+}
+
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
   let userService: UserService;
   let ngOnInitSpy: jasmine.Spy;
-  let page: Page;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -72,8 +88,7 @@ describe('MainComponent', () => {
     ];
 
     setUpPageObject();
-
-    page.getRowElement(0).click();
+    clickRow(0);
 
     expect(mainComponent.selectedUser).toBe(selectedTestUser);
   }));
@@ -88,8 +103,7 @@ describe('MainComponent', () => {
     mainComponent.users = testUsers;
     setUpPageObject();
 
-    page.getDeleteButtonElement(1).click();
-    mainFixture.detectChanges();
+    clickDelete(1);
 
     expect(mainComponent.users[0]).toBe(testUsers[0]);
     expect(mainComponent.users[1]).toBe(testUsers[2]);
@@ -103,12 +117,8 @@ describe('MainComponent', () => {
     ];
 
     setUpPageObject();
-
-    page.getRowElement(1).click();
-    mainFixture.detectChanges();
-
-    page.getDeleteButtonElement(1).click();
-    mainFixture.detectChanges();
+    clickRow(1);
+    clickDelete(1);
 
     expect(mainComponent.selectedUser).toBeUndefined();
   }));
@@ -122,12 +132,8 @@ describe('MainComponent', () => {
     ];
 
     setUpPageObject();
-
-    page.getRowElement(1).click();
-    mainFixture.detectChanges();
-
-    page.getDeleteButtonElement(2).click();
-    mainFixture.detectChanges();
+    clickRow(1);
+    clickDelete(2);
 
     expect(mainComponent.selectedUser).toBe(testUser);
   }));
@@ -140,9 +146,7 @@ describe('MainComponent', () => {
     ];
 
     setUpPageObject();
-
-    page.getAddButtonElement().click();
-    mainFixture.detectChanges();
+    clickAdd();
 
     expect(mainComponent.users.length).toBe(4);
   }));
