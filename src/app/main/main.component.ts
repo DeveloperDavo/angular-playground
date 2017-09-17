@@ -26,8 +26,10 @@ export class MainComponent implements OnInit {
     this.selectedUser = user;
   }
 
-  onDelete(userToDelete: User): void {
+  onDelete(userToDelete: User, event: Event): void {
     this.users = this.users.filter(user => user !== userToDelete);
+    this.selectedUser = undefined;
+    event.stopImmediatePropagation();
   }
 
   onAdd(): void {
