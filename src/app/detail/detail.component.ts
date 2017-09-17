@@ -1,5 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {User} from '../user';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-detail',
@@ -8,4 +9,10 @@ import {User} from '../user';
 })
 export class DetailComponent {
   @Input() user: User;
+  detailForm = new FormGroup({
+    name: new FormControl(),
+    username: new FormControl(),
+    email: new FormControl(),
+    phone: new FormControl()
+  });
 }

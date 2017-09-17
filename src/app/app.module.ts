@@ -6,7 +6,7 @@ import {MainComponent} from './main/main.component';
 import {UserService} from './user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DetailComponent} from './detail/detail.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import {FormsModule} from '@angular/forms';
     DetailComponent
   ],
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule
   ],

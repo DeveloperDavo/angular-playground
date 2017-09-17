@@ -2,7 +2,7 @@ import {async, ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/t
 
 import {DetailComponent} from './detail.component';
 import {By} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 
 let fixture: ComponentFixture<DetailComponent>;
@@ -14,7 +14,7 @@ describe('DetailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DetailComponent],
-      imports: [FormsModule]
+      imports: [ReactiveFormsModule]
     })
       .compileComponents();
   }));
@@ -61,6 +61,7 @@ describe('DetailComponent', () => {
     tick();
     page = new Page();
     fixture.detectChanges();
+    console.log(page);
 
     expect(page.getNameValue()).toBe('Foo Bar');
     expect(page.getUsernameValue()).toBe('foobar');
