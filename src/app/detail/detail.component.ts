@@ -3,6 +3,7 @@ import {User} from '../user';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import 'rxjs/add/operator/switchMap';
 import {UserService} from '../user.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -14,16 +15,20 @@ export class DetailComponent implements OnInit {
   detailForm: FormGroup;
 
   constructor(private fBuilder: FormBuilder,
-              private userService: UserService) {
+              private userService: UserService,
+              private route: ActivatedRoute) {
     this.createForm();
   }
 
   ngOnInit() {
-    this.userService.getUserPromise()
-      .then(users => this.user = users[0])
-      .catch(() => {
-        throw new Error('Error');
-      });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.userService.getUserPromise()
+        .then(users => this.user = users[params.get('id')])
+        .catch(() => {
+          throw new Error('Error');
+        });
+    });
+
   }
 
   createForm() {

@@ -12,7 +12,7 @@
   </thead>
   <tbody *ngFor="let user of users"
          [class.selected]="user === selectedUser"
-         [routerLink]="['/detail', user.id]">
+         [routerLink]="['/detail', user.id - 1]">
   <tr>
     <td>{{user.name}}</td>
     <td>{{user.username}}</td>
