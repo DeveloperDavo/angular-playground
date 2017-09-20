@@ -1,6 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {User} from '../user';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-detail',
@@ -8,7 +9,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  @Input() user: User;
+  user: User;
   detailForm: FormGroup;
 
   constructor(private fBuilder: FormBuilder) {
