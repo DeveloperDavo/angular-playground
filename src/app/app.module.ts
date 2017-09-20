@@ -14,6 +14,7 @@ const appRoutes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'detail', component: DetailComponent},
   {path: 'temp', component: TempComponent},
+  {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 
 @NgModule({
