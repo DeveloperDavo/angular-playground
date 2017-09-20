@@ -6,32 +6,22 @@ import {MainComponent} from './main/main.component';
 import {UserService} from './user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DetailComponent} from './detail/detail.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule, Routes} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
 import {TempComponent} from './temp/temp.component';
-
-const appRoutes: Routes = [
-  {path: 'main', component: MainComponent},
-  {path: 'detail', component: DetailComponent},
-  {path: 'temp', component: TempComponent},
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
-];
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     DetailComponent,
-    TempComponent
+    TempComponent,
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: true} // <-- debugging purposes only
-    )
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
