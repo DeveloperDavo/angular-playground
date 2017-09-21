@@ -8,7 +8,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent {
-  @Input() user: User;
+  user: User;
   detailForm: FormGroup;
 
   constructor(private fBuilder: FormBuilder) {

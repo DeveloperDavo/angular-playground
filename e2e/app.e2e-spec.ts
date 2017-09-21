@@ -10,6 +10,8 @@ describe('e2e', () => {
     expectUrlToBeMain();
 
     shouldDisplayUsers();
+
+    shouldNavigateToDetailUponRowClick();
   });
 
 
@@ -24,4 +26,9 @@ describe('e2e', () => {
     expect(page.getTextOfColumnInRow(3, 9)).toBeTruthy();
   }
 
+  function shouldNavigateToDetailUponRowClick() {
+    page.getRow(0).click();
+
+    expect(browser.getCurrentUrl()).toBe('http://localhost:49152/detail');
+  }
 });

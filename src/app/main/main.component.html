@@ -13,7 +13,8 @@
     </thead>
     <tbody id="main-table" *ngFor="let user of users"
            (click)="onSelect(user)"
-           [class.selected]="user === selectedUser">
+           [class.selected]="user === selectedUser"
+           [routerLink]="['/detail']">
     <tr>
       <td>{{user.name}}</td>
       <td>{{user.username}}</td>
@@ -28,5 +29,4 @@
     </tbody>
   </table>
 </div>
-<app-detail [user]="selectedUser"></app-detail>
 
