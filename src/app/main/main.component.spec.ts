@@ -5,14 +5,9 @@ import {By} from '@angular/platform-browser';
 import {UserService} from '../user.service';
 import {User} from '../user';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {Component, DebugElement, Input} from '@angular/core';
 import {fakeAsync} from '@angular/core/testing';
 import {tick} from '@angular/core/testing';
-
-@Component({selector: 'app-detail', template: ''})
-class DetailStubComponent {
-  @Input() user: User;
-}
+import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 
 let mainFixture: ComponentFixture<MainComponent>;
 let page: Page;
@@ -39,9 +34,10 @@ describe('MainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainComponent, DetailStubComponent],
+      declarations: [MainComponent],
       providers: [UserService],
       imports: [HttpClientTestingModule],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   }));
