@@ -1,8 +1,10 @@
 import {AppPage} from './app.po';
 import {browser} from 'protractor';
+import {DetailPage} from './detail.po';
 
 describe('e2e', () => {
   const page = new AppPage();
+  const detailPage = new DetailPage();
 
   it('user journey', () => {
     page.navigateToRoot();
@@ -11,7 +13,9 @@ describe('e2e', () => {
 
     shouldDisplayUsers();
 
-    shouldNavigateToDetailUponRowClick();
+    shouldNavigateToDetailUrlUponRowClick();
+
+    shouldDisplayDetailView();
   });
 
 
@@ -26,9 +30,13 @@ describe('e2e', () => {
     expect(page.getTextOfColumnInRow(3, 9)).toBeTruthy();
   }
 
-  function shouldNavigateToDetailUponRowClick() {
-    page.getRow(0).click();
+  function shouldNavigateToDetailUrlUponRowClick() {
+    page.getRow(1).click();
 
     expect(browser.getCurrentUrl()).toMatch(new RegExp(/http:\/\/localhost:49152\/detail\/\d+/));
+  }
+
+  function shouldDisplayDetailView() {
+    expect(detailPage.getUsername()).toBeTruthy();
   }
 });
