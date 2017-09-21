@@ -1,34 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {User} from '../user';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import 'rxjs/add/operator/switchMap';
-import {UserService} from '../user.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
-  user: User;
+export class DetailComponent {
+  @Input() user: User;
   detailForm: FormGroup;
 
-  constructor(private fBuilder: FormBuilder,
-              private userService: UserService,
-              private route: ActivatedRoute) {
+  constructor(private fBuilder: FormBuilder) {
     this.createForm();
-  }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe((params: ParamMap) => {
-      this.userService.getUserPromise()
-        .then(users => this.user = users[params.get('id')])
-        .catch(() => {
-          throw new Error('Error');
-        });
-    });
-
   }
 
   createForm() {

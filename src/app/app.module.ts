@@ -6,22 +6,18 @@ import {MainComponent} from './main/main.component';
 import {UserService} from './user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DetailComponent} from './detail/detail.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {TempComponent} from './temp/temp.component';
-import {AppRoutingModule} from './app-routing.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    DetailComponent,
-    TempComponent,
+    DetailComponent
   ],
   imports: [
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
+    HttpClientModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
