@@ -9,18 +9,12 @@ describe('e2e', () => {
 
     expectUrlToBeMain();
 
-    shouldDisplayWelcomeToApp();
-
     shouldDisplayUsers();
   });
 
 
   function expectUrlToBeMain() {
     expect(browser.getCurrentUrl()).toBe('http://localhost:49152/main');
-  }
-
-  function shouldDisplayWelcomeToApp() {
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
   }
 
   function shouldDisplayUsers() {
