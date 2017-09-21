@@ -29,6 +29,6 @@ describe('e2e', () => {
   function shouldNavigateToDetailUponRowClick() {
     page.getRow(0).click();
 
-    expect(browser.getCurrentUrl()).toBe('http://localhost:49152/detail');
+    expect(browser.getCurrentUrl()).toMatch(new RegExp(/http:\/\/localhost:49152\/detail\/\d+/));
   }
 });

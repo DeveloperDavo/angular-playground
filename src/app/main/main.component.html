@@ -14,7 +14,7 @@
     <tbody id="main-table" *ngFor="let user of users"
            (click)="onSelect(user)"
            [class.selected]="user === selectedUser"
-           [routerLink]="['/detail']">
+           [routerLink]="['/detail', user.id]">
     <tr>
       <td>{{user.name}}</td>
       <td>{{user.username}}</td>

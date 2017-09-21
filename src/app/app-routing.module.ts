@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 
 const appRoutes: Routes = [
   {path: 'main', component: MainComponent},
-  {path: 'detail', component: DetailComponent},
+  {path: 'detail/:id', component: DetailComponent},
   {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 
