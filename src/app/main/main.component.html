@@ -10,7 +10,7 @@
     <th>Phone</th>
   </tr>
   </thead>
-  <tbody *ngFor="let user of users"
+  <tbody id="main-table" *ngFor="let user of users"
          (click)="onSelect(user)"
          [class.selected]="user === selectedUser">
   <tr>

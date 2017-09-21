@@ -22,10 +22,6 @@ export class AppPage {
   }
 
   private getAllTrElements(): ElementArrayFinder {
-    return element.all(by.css('app-main tr'));
-  }
-
-  getNameOfUserDetails() {
-    return element(by.css('#user-details-name')).getText();
+    return element.all(by.css('#main-table tr'));
   }
 }
