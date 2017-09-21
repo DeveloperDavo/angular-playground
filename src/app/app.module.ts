@@ -7,6 +7,7 @@ import {UserService} from './user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DetailComponent} from './detail/detail.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     ReactiveFormsModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

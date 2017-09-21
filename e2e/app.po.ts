@@ -1,7 +1,7 @@
 import {browser, by, element, ElementArrayFinder} from 'protractor';
 
 export class AppPage {
-  navigateTo() {
+  navigateToRoot() {
     return browser.get('/');
   }
 
@@ -24,7 +24,6 @@ export class AppPage {
   private getAllTrElements(): ElementArrayFinder {
     return element.all(by.css('app-main tr'));
   }
-
 
   getNameOfUserDetails() {
     return element(by.css('#user-details-name')).getText();
