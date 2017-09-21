@@ -1,9 +1,9 @@
-import {AppPage} from './app.po';
+import {MainPage} from './main.po';
 import {browser} from 'protractor';
 import {DetailPage} from './detail.po';
 
 describe('e2e', () => {
-  const page = new AppPage();
+  const page = new MainPage();
   const detailPage = new DetailPage();
 
   it('user journey', () => {

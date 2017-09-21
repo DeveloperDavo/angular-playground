@@ -1,6 +1,6 @@
 import {browser, by, element, ElementArrayFinder} from 'protractor';
 
-export class AppPage {
+export class MainPage {
   navigateToRoot() {
     return browser.get('/');
   }
