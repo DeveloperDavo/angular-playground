@@ -5,10 +5,6 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
-  }
-
   getTextOfColumnInRow(columnIndex: number, rowIndex: number) {
     return this.getAllTdElementsInIthTr(rowIndex).get(columnIndex).getText();
   }
