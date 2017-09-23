@@ -18,11 +18,6 @@ export class UserService {
   }
 
   getUserPromise(id: number): Promise<User> {
-    return new Promise(res => {
-      this.http.get('')
-        .subscribe(user => {
-          res(user);
-        });
-    });
+    return new Promise(res => res({id: id, username: 'test'}));
   }
 }

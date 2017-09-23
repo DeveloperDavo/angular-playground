@@ -34,18 +34,4 @@ describe('UserService', () => {
     });
   });
 
-  it('should get single user from resolved promise', done => {
-    const http = createSpyObj('httpClient', ['get']);
-    const userService = new UserService(http);
-
-    const testId = 1;
-    const testUser = {id: testId, username: 'Foo'};
-
-    http.get.and.returnValue(Observable.of(testUser));
-
-    userService.getUserPromise(testId).then(user => {
-      expect(user).toEqual(testUser);
-      done();
-    });
-  });
 });
