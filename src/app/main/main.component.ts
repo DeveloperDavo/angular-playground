@@ -14,7 +14,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUserPromise()
+    this.userService.getUsersPromise()
       .then(users => this.users = users)
       .catch(() => {
         throw new Error('Error');

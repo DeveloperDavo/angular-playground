@@ -11,7 +11,7 @@ describe('UserService', () => {
 
     http.get.and.returnValue(Observable.never());
 
-    userService.getUserPromise();
+    userService.getUsersPromise();
 
     expect(http.get).toHaveBeenCalledWith('https://jsonplaceholder.typicode.com/users');
   });
@@ -28,7 +28,7 @@ describe('UserService', () => {
 
     http.get.and.returnValue(Observable.of(testUsers));
 
-    userService.getUserPromise().then(users => {
+    userService.getUsersPromise().then(users => {
       expect(users).toEqual(testUsers);
       done();
     });
