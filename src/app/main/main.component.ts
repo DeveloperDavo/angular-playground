@@ -24,7 +24,4 @@ export class MainComponent implements OnInit {
     this.users = this.users.filter(user => user !== userToDelete);
   }
 
-  onAdd(): void {
-    this.users.push(new User(-1, ''));
-  }
 }

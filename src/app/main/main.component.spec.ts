@@ -92,19 +92,6 @@ describe('MainComponent', () => {
     expect(mainComponent.users[1]).toBe(testUsers[2]);
   }));
 
-  it('should add user upon button click', fakeAsync(() => {
-    mainComponent.users = [
-      {id: 1, username: 'Foo'},
-      {id: 2, username: 'Bar'},
-      {id: 3, username: 'Baz'}
-    ];
-
-    setUpPageObject();
-    clickAdd();
-
-    expect(mainComponent.users.length).toBe(4);
-  }));
-
   describe('should render', () => {
     it('user table with 3 elements', fakeAsync(() => {
       const testUsers = [
