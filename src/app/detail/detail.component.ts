@@ -1,18 +1,25 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../user';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent {
-  user: User = {id: 9, username: 'Foo'};
+export class DetailComponent implements OnInit {
+  user: User;
+  id: number;
   detailForm: FormGroup;
 
-  constructor(private fBuilder: FormBuilder) {
+  constructor(private fBuilder: FormBuilder, private userService: UserService) {
     this.createForm();
+  }
+
+  ngOnInit(): void {
+    this.userService.getUserPromise(this.id)
+      .then(user => this.user = user);
   }
 
   createForm() {

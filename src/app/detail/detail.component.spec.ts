@@ -4,6 +4,8 @@ import {DetailComponent} from './detail.component';
 import {By} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
+import {UserService} from "../user.service";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 let fixture: ComponentFixture<DetailComponent>;
 let page: Page;
@@ -15,13 +17,23 @@ function setUpPage() {
   fixture.detectChanges();
 }
 
+function updateInputField(element: any, inputValue: string) {
+  element.value = inputValue;
+  const event = new Event('input');
+  element.dispatchEvent(event);
+}
+
 describe('DetailComponent', () => {
   let component: DetailComponent;
+  let userService: UserService;
+  let ngOnInitSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+
       declarations: [DetailComponent],
-      imports: [ReactiveFormsModule]
+      providers: [UserService],
+      imports: [ReactiveFormsModule, HttpClientTestingModule]
     })
       .compileComponents();
   }));
@@ -29,6 +41,10 @@ describe('DetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DetailComponent);
     component = fixture.componentInstance;
+
+    userService = fixture.debugElement.injector.get(UserService);
+
+    ngOnInitSpy = spyOn(component, 'ngOnInit');
   });
 
   it('should be created', () => {
@@ -52,11 +68,24 @@ describe('DetailComponent', () => {
     expect(user.phone).toBe('5678');
   }));
 
-  function updateInputField(element: any, inputValue: string) {
-    element.value = inputValue;
-    const event = new Event('input');
-    element.dispatchEvent(event);
-  }
+  it('should get user from User service', async(() => {
+    ngOnInitSpy.and.callThrough();
+
+    const testId = 1;
+    component.id = testId;
+    const testUser = {id: testId, username: 'Foo'};
+
+    const spy = spyOn(userService, 'getUserPromise')
+      .and.returnValue(Promise.resolve(testUser));
+
+    fixture.detectChanges();
+
+    spy.calls.mostRecent().returnValue.then(() => {
+      fixture.detectChanges();
+      expect(userService.getUserPromise).toHaveBeenCalledWith(testId);
+      expect(component.user).toBe(testUser);
+    });
+  }));
 
   it('should render user\'s details', fakeAsync(() => {
     component.user = {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'};
