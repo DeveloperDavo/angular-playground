@@ -10,17 +10,17 @@ import {tick} from '@angular/core/testing';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {Router} from '@angular/router';
 
-let mainFixture: ComponentFixture<MainComponent>;
+let fixture: ComponentFixture<MainComponent>;
 let page: Page;
 
 function clickRow(index: number) {
   page.getRowElement(index).click();
-  mainFixture.detectChanges();
+  fixture.detectChanges();
 }
 
 function clickDelete(index: number) {
   page.getDeleteButtonElement(index).click();
-  mainFixture.detectChanges();
+  fixture.detectChanges();
 }
 
 class RouterStub {
@@ -29,7 +29,7 @@ class RouterStub {
 }
 
 describe('MainComponent', () => {
-  let mainComponent: MainComponent;
+  let component: MainComponent;
   let userService: UserService;
   let router: Router;
   let ngOnInitSpy: jasmine.Spy;
@@ -46,17 +46,17 @@ describe('MainComponent', () => {
   }));
 
   beforeEach(() => {
-    mainFixture = TestBed.createComponent(MainComponent);
-    mainComponent = mainFixture.componentInstance;
+    fixture = TestBed.createComponent(MainComponent);
+    component = fixture.componentInstance;
 
-    userService = mainFixture.debugElement.injector.get(UserService);
-    router = mainFixture.debugElement.injector.get(Router);
+    userService = fixture.debugElement.injector.get(UserService);
+    router = fixture.debugElement.injector.get(Router);
 
-    ngOnInitSpy = spyOn(mainComponent, 'ngOnInit');
+    ngOnInitSpy = spyOn(component, 'ngOnInit');
   });
 
   it('should be created', () => {
-    expect(mainComponent).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should get users from User service', async(() => {
@@ -71,18 +71,18 @@ describe('MainComponent', () => {
     const spy = spyOn(userService, 'getUsersPromise')
       .and.returnValue(Promise.resolve(testUsers));
 
-    mainFixture.detectChanges();
+    fixture.detectChanges();
 
     spy.calls.mostRecent().returnValue.then(() => {
-      mainFixture.detectChanges();
-      expect(mainComponent.users).toBe(testUsers);
+      fixture.detectChanges();
+      expect(component.users).toBe(testUsers);
     });
   }));
 
   it('should navigate to detail url upon row click', fakeAsync(() => {
     const spy = spyOn(router, 'navigateByUrl');
 
-    mainComponent.users = [
+    component.users = [
       {id: 0, username: 'Foo'},
       {id: 1, username: 'Bar'},
       {id: 2, username: 'Baz'}
@@ -105,13 +105,13 @@ describe('MainComponent', () => {
       {id: 3, username: 'Baz'}
     ];
 
-    mainComponent.users = testUsers;
+    component.users = testUsers;
     setUpPageObject();
 
     clickDelete(1);
 
-    expect(mainComponent.users[0]).toBe(testUsers[0]);
-    expect(mainComponent.users[1]).toBe(testUsers[2]);
+    expect(component.users[0]).toBe(testUsers[0]);
+    expect(component.users[1]).toBe(testUsers[2]);
   }));
 
   describe('should render', () => {
@@ -122,7 +122,7 @@ describe('MainComponent', () => {
         {id: 3, username: 'Baz'}
       ];
 
-      mainComponent.users = testUsers;
+      component.users = testUsers;
 
       setUpPageObject();
 
@@ -139,7 +139,7 @@ describe('MainComponent', () => {
         {id: 4, username: 'Fizz'}
       ];
 
-      mainComponent.users = testUsers;
+      component.users = testUsers;
 
       setUpPageObject();
 
@@ -150,7 +150,7 @@ describe('MainComponent', () => {
     }));
 
     it('user details', fakeAsync(() => {
-      mainComponent.users = [
+      component.users = [
         {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'},
       ];
 
@@ -164,10 +164,10 @@ describe('MainComponent', () => {
   });
 
   function setUpPageObject() {
-    mainFixture.detectChanges();
+    fixture.detectChanges();
     tick();
     page = new Page();
-    mainFixture.detectChanges();
+    fixture.detectChanges();
   }
 });
 
@@ -179,11 +179,11 @@ class Page {
   addButton: DebugElement;
 
   constructor() {
-    this.tableBody = mainFixture.debugElement.query(By.css('tbody'));
-    this.tableRows = mainFixture.debugElement.queryAll(By.css('tbody tr'));
-    this.tableRowColumns = mainFixture.debugElement.queryAll(By.css('tbody tr td'));
-    this.deleteButtons = mainFixture.debugElement.queryAll(By.css('#delete-button'));
-    this.addButton = mainFixture.debugElement.query(By.css('#add-button'));
+    this.tableBody = fixture.debugElement.query(By.css('tbody'));
+    this.tableRows = fixture.debugElement.queryAll(By.css('tbody tr'));
+    this.tableRowColumns = fixture.debugElement.queryAll(By.css('tbody tr td'));
+    this.deleteButtons = fixture.debugElement.queryAll(By.css('#delete-button'));
+    this.addButton = fixture.debugElement.query(By.css('#add-button'));
   }
 
   getRowElement(index: number) {
