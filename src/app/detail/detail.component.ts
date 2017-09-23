@@ -10,7 +10,6 @@ import {ParamMap, ActivatedRoute} from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   user: User;
-  id: number;
   detailForm: FormGroup;
 
   constructor(private fBuilder: FormBuilder,
