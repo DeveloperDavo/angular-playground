@@ -8,6 +8,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {fakeAsync} from '@angular/core/testing';
 import {tick} from '@angular/core/testing';
 import {DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Router} from '@angular/router';
 
 let mainFixture: ComponentFixture<MainComponent>;
 let page: Page;
@@ -22,20 +23,22 @@ function clickDelete(index: number) {
   mainFixture.detectChanges();
 }
 
-function clickAdd() {
-  page.getAddButtonElement().click();
-  mainFixture.detectChanges();
+class RouterStub {
+  navigateByUrl(url: string): void {
+  }
 }
 
 describe('MainComponent', () => {
   let mainComponent: MainComponent;
   let userService: UserService;
+  let router: Router;
   let ngOnInitSpy: jasmine.Spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [MainComponent],
-      providers: [UserService],
+      providers: [UserService,
+        {provide: Router, useClass: RouterStub}],
       imports: [HttpClientTestingModule],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -47,6 +50,7 @@ describe('MainComponent', () => {
     mainComponent = mainFixture.componentInstance;
 
     userService = mainFixture.debugElement.injector.get(UserService);
+    router = mainFixture.debugElement.injector.get(Router);
 
     ngOnInitSpy = spyOn(mainComponent, 'ngOnInit');
   });
@@ -73,6 +77,24 @@ describe('MainComponent', () => {
       mainFixture.detectChanges();
       expect(mainComponent.users).toBe(testUsers);
     });
+  }));
+
+  it('should navigate to detail url upon row click', fakeAsync(() => {
+    const spy = spyOn(router, 'navigateByUrl');
+
+    mainComponent.users = [
+      {id: 0, username: 'Foo'},
+      {id: 1, username: 'Bar'},
+      {id: 2, username: 'Baz'}
+    ];
+
+    setUpPageObject();
+
+    clickRow(2);
+
+    const navArgs = spy.calls.first().args[0];
+
+    expect(navArgs).toBe('/detail/' + 2);
 
   }));
 

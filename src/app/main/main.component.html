@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody id="main-table" *ngFor="let user of users"
-           [routerLink]="['/detail', user.id]">
+           (click)="onRowClick(user)">
     <tr>
       <td>{{user.name}}</td>
       <td>{{user.username}}</td>
