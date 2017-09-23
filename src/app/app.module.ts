@@ -1,27 +1,19 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {UserService} from './user.service';
-import {HttpClientModule} from '@angular/common/http';
-import {DetailComponent} from './detail/detail.component';
-import {ReactiveFormsModule} from '@angular/forms';
-import {AppRoutingModule} from './app-routing.module';
 import {MainModule} from './main/main.module';
+import {DetailModule} from './detail/detail.module';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DetailComponent
+    AppComponent
   ],
   imports: [
-    ReactiveFormsModule,
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MainModule
+    MainModule,
+    DetailModule,
+    AppRoutingModule
   ],
-  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
