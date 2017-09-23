@@ -68,21 +68,27 @@ describe('DetailComponent', () => {
     expect(user.phone).toBe('5678');
   }));
 
-  it('should get user from User service', async(() => {
+  it('should filter user from User service', async(() => {
     ngOnInitSpy.and.callThrough();
 
-    const testId = 1;
-    component.id = testId;
-    const testUser = {id: testId, username: 'Foo'};
+    const testId = 2;
+    const testUser = {id: testId, username: 'Bar'};
+    const testUsers = [
+      {id: 1, username: 'Foo'},
+      testUser,
+      {id: 3, username: 'Baz'}
+    ];
 
-    const spy = spyOn(userService, 'getUserPromise')
-      .and.returnValue(Promise.resolve(testUser));
+    component.id = testId;
+
+    const spy = spyOn(userService, 'getUsersPromise')
+      .and.returnValue(Promise.resolve(testUsers));
 
     fixture.detectChanges();
 
     spy.calls.mostRecent().returnValue.then(() => {
       fixture.detectChanges();
-      expect(userService.getUserPromise).toHaveBeenCalledWith(testId);
+      expect(userService.getUsersPromise).toHaveBeenCalled();
       expect(component.user).toBe(testUser);
     });
   }));

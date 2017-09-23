@@ -15,11 +15,15 @@ export class DetailComponent implements OnInit {
 
   constructor(private fBuilder: FormBuilder, private userService: UserService) {
     this.createForm();
+    this.id = 5;
   }
 
   ngOnInit(): void {
-    this.userService.getUserPromise(this.id)
-      .then(user => this.user = user);
+    this.userService.getUsersPromise()
+      .then(users => {
+        const filteredUsers = users.filter(user => user.id === this.id);
+        this.user = filteredUsers[0];
+      });
   }
 
   createForm() {

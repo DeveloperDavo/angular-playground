@@ -16,8 +16,4 @@ export class UserService {
         });
     });
   }
-
-  getUserPromise(id: number): Promise<User> {
-    return new Promise(res => res({id: id, username: 'test'}));
-  }
 }
