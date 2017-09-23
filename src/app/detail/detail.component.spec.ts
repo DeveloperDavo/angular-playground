@@ -4,8 +4,10 @@ import {DetailComponent} from './detail.component';
 import {By} from '@angular/platform-browser';
 import {ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
-import {UserService} from "../user.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {UserService} from '../user.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {convertToParamMap, ParamMap, ActivatedRoute} from '@angular/router';
 
 let fixture: ComponentFixture<DetailComponent>;
 let page: Page;
@@ -23,16 +25,37 @@ function updateInputField(element: any, inputValue: string) {
   element.dispatchEvent(event);
 }
 
+class ActivatedRouteStub {
+  // ActivatedRoute.paramMap is Observable
+  private subject = new BehaviorSubject(convertToParamMap(this.testParamMap));
+  paramMap = this.subject.asObservable();
+
+  // Test parameters
+  private _testParamMap: ParamMap;
+  get testParamMap() {
+    return this._testParamMap;
+  }
+
+  set testParamMap(params: {}) {
+    this._testParamMap = convertToParamMap(params);
+    this.subject.next(this._testParamMap);
+  }
+}
+
 describe('DetailComponent', () => {
   let component: DetailComponent;
   let userService: UserService;
   let ngOnInitSpy: jasmine.Spy;
+  let activatedRoute: ActivatedRouteStub;
 
   beforeEach(async(() => {
+    activatedRoute = new ActivatedRouteStub();
     TestBed.configureTestingModule({
 
       declarations: [DetailComponent],
-      providers: [UserService],
+      providers: [UserService,
+        {provide: ActivatedRoute, useValue: activatedRoute},
+      ],
       imports: [ReactiveFormsModule, HttpClientTestingModule]
     })
       .compileComponents();
@@ -68,7 +91,7 @@ describe('DetailComponent', () => {
     expect(user.phone).toBe('5678');
   }));
 
-  it('should filter user from User service', async(() => {
+  it('should filter user by router param id from User service', async(() => {
     ngOnInitSpy.and.callThrough();
 
     const testId = 2;
@@ -79,7 +102,7 @@ describe('DetailComponent', () => {
       {id: 3, username: 'Baz'}
     ];
 
-    component.id = testId;
+    activatedRoute.testParamMap = {id: testId};
 
     const spy = spyOn(userService, 'getUsersPromise')
       .and.returnValue(Promise.resolve(testUsers));

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {User} from '../user';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {UserService} from '../user.service';
+import {ParamMap, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-detail',
@@ -13,17 +14,20 @@ export class DetailComponent implements OnInit {
   id: number;
   detailForm: FormGroup;
 
-  constructor(private fBuilder: FormBuilder, private userService: UserService) {
+  constructor(private fBuilder: FormBuilder,
+              private userService: UserService,
+              private route: ActivatedRoute) {
     this.createForm();
-    this.id = 5;
   }
 
   ngOnInit(): void {
-    this.userService.getUsersPromise()
-      .then(users => {
-        const filteredUsers = users.filter(user => user.id === this.id);
-        this.user = filteredUsers[0];
-      });
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.userService.getUsersPromise()
+        .then(users => {
+          const filteredUsers = users.filter(user => user.id === Number(params.get('id')));
+          this.user = filteredUsers[0];
+        });
+    });
   }
 
   createForm() {
