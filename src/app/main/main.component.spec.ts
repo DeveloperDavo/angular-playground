@@ -194,19 +194,11 @@ class Page {
     return this.getRowElement(index).textContent;
   }
 
-  getTableBodyClasses() {
-    return this.tableBody.classes;
-  }
-
   getColumnTextContent(index: number) {
     return this.tableRowColumns[index].nativeElement.textContent;
   }
 
   getDeleteButtonElement(index: number) {
     return this.deleteButtons[index].nativeElement;
-  }
-
-  getAddButtonElement() {
-    return this.addButton.nativeElement;
   }
 }
