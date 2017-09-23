@@ -8,7 +8,6 @@ import {User} from '../user';
 })
 export class MainComponent implements OnInit {
   users: User[];
-  selectedUser: User;
 
   constructor(private userService: UserService) {
   }
@@ -21,16 +20,8 @@ export class MainComponent implements OnInit {
       });
   }
 
-  onSelect(user: User): void {
-    this.selectedUser = user;
-  }
-
   onDelete(userToDelete: User, event: Event): void {
     this.users = this.users.filter(user => user !== userToDelete);
-    if (this.selectedUser === userToDelete) {
-      this.selectedUser = undefined;
-    }
-    event.stopImmediatePropagation();
   }
 
   onAdd(): void {

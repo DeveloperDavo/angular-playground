@@ -76,19 +76,6 @@ describe('MainComponent', () => {
 
   }));
 
-  it('should set selectedUser upon row click', fakeAsync(() => {
-    const selectedTestUser = {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'};
-    mainComponent.users = [
-      selectedTestUser,
-      {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'}
-    ];
-
-    setUpPageObject();
-    clickRow(0);
-
-    expect(mainComponent.selectedUser).toBe(selectedTestUser);
-  }));
-
   it('should delete user upon button click', fakeAsync(() => {
     const testUsers = [
       {id: 1, username: 'Foo'},
@@ -103,35 +90,6 @@ describe('MainComponent', () => {
 
     expect(mainComponent.users[0]).toBe(testUsers[0]);
     expect(mainComponent.users[1]).toBe(testUsers[2]);
-  }));
-
-  it('expects selected user to be undefined after deleting selected user', fakeAsync(() => {
-    mainComponent.users = [
-      {id: 1, username: 'Foo'},
-      {id: 2, username: 'Bar'},
-      {id: 3, username: 'Baz'}
-    ];
-
-    setUpPageObject();
-    clickRow(1);
-    clickDelete(1);
-
-    expect(mainComponent.selectedUser).toBeUndefined();
-  }));
-
-  it('expects selected user to remain selected after deleting another user', fakeAsync(() => {
-    const testUser = {id: 2, username: 'Bar'};
-    mainComponent.users = [
-      {id: 1, username: 'Foo'},
-      testUser,
-      {id: 3, username: 'Baz'}
-    ];
-
-    setUpPageObject();
-    clickRow(1);
-    clickDelete(2);
-
-    expect(mainComponent.selectedUser).toBe(testUser);
   }));
 
   it('should add user upon button click', fakeAsync(() => {
@@ -193,20 +151,6 @@ describe('MainComponent', () => {
       expect(page.getColumnTextContent(1)).toContain('username');
       expect(page.getColumnTextContent(2)).toContain('email');
       expect(page.getColumnTextContent(3)).toContain('phone');
-    }));
-
-    it('selected row style upon row click', fakeAsync(() => {
-      mainComponent.users = [
-        {id: 0, name: 'Foo Bar', username: 'foobar', email: 'foobar@gmail.com', phone: '1234'},
-        {id: 1, name: 'name', username: 'username', email: 'email', phone: 'phone'}
-      ];
-
-      setUpPageObject();
-
-      page.getRowElement(0).click();
-      mainFixture.detectChanges();
-
-      expect(page.getTableBodyClasses().selected).toBe(true);
     }));
   });
 
