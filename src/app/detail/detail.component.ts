@@ -5,7 +5,6 @@ import {UserService} from '../user.service';
 import {ParamMap, ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
