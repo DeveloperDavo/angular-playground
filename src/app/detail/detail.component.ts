@@ -22,8 +22,8 @@ export class DetailComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.userService.getUsersPromise()
         .then(users => {
-          const filteredUsers = users.filter(user => user.id === Number(params.get('id')));
-          this.user = filteredUsers[0];
+          users.filter(user => user.id === Number(params.get('id')))
+            .map(user => this.user = user);
         });
     });
   }
