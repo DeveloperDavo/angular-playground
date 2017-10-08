@@ -36,4 +36,9 @@ describe('SampleComponent', () => {
     dragulaService.dropModel.emit([]);
     expect(component.wasDropped).toBe(true);
   });
+
+  it('should get custom attribute value', () => {
+    const tempValue = document.getElementById('temp').dataset.tempvalue;
+    expect(tempValue).toBe('bar');
+  });
 });
