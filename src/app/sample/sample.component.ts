@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DragulaService} from "ng2-dragula";
 
 @Component({
   templateUrl: './sample.component.html',
@@ -8,9 +9,11 @@ export class SampleComponent implements OnInit {
   talheres: String[] = ['o garfo', 'o colher', 'a faca'];
   bebidas: String[] = ['a coca', 'a cerveja', 'a caiparinha'];
 
-  constructor() { }
+  constructor(private dragulaService: DragulaService) { }
 
   ngOnInit() {
+    this.dragulaService.dropModel.subscribe(elements => {
+      elements.forEach(element => console.log(element));
+    });
   }
-
 }
