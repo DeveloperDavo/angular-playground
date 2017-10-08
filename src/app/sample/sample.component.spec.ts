@@ -7,10 +7,10 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 describe('SampleComponent', () => {
   let component: SampleComponent;
   let fixture: ComponentFixture<SampleComponent>;
+  let dragulaService: DragulaService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [DragulaModule],
       declarations: [SampleComponent],
       providers: [DragulaService],
       schemas: [NO_ERRORS_SCHEMA]
@@ -20,13 +20,10 @@ describe('SampleComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SampleComponent);
-    component = fixture.componentInstance;
+    dragulaService = new DragulaService();
+    component = new SampleComponent(dragulaService);
 
     fixture.detectChanges();
-  });
-
-  it('should be created', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should get project id from custom attribute', () => {
@@ -35,11 +32,9 @@ describe('SampleComponent', () => {
   });
 
   it('should get project id from dropped element', () => {
-    const dragularService = new DragulaService();
-    const comp = new SampleComponent(dragularService);
-    comp.ngOnInit();
-    dragularService.dropModel.emit(['bag', document.getElementById('projectId-5')]);
-    expect(comp.droppedProjectId).toBe(5);
+    component.ngOnInit();
+    dragulaService.dropModel.emit(['bag', document.getElementById('projectId-5')]);
+    expect(component.droppedProjectId).toBe(5);
   });
 
 });
