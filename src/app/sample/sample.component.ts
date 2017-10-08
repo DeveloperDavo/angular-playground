@@ -16,15 +16,14 @@ export class SampleComponent implements OnInit {
     {id: 10, description: 'a cerveja'},
     {id: 11, description: 'o suco'}];
 
-  wasDropped = false;
+  droppedProjectId: number;
 
   constructor(private dragulaService: DragulaService) {
   }
 
   ngOnInit() {
     this.dragulaService.dropModel.subscribe(elements => {
-      this.wasDropped = true;
-      elements.forEach(element => console.log(element));
+      this.droppedProjectId = Number(elements[1].dataset.projectid);
     });
   }
 }

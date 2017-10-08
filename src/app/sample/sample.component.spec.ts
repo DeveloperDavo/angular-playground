@@ -32,15 +32,15 @@ describe('SampleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should fire dropModel event', () => {
-    dragulaService.dropModel.emit([]);
-    expect(component.wasDropped).toBe(true);
-  });
-
   it('should get project id from custom attribute', () => {
-    const elementById = document.getElementById('projectId-5');
-    console.log(elementById);
-    const projectId = elementById.dataset.projectid;
+    const projectId = document.getElementById('projectId-5').dataset.projectid;
     expect(projectId).toBe('5');
   });
+
+  it('should get project id from dropped element', () => {
+    dragulaService.dropModel.emit(['bag', document.getElementById('projectId-5')]);
+    fixture.detectChanges();
+    expect(component.droppedProjectId).toBe(5);
+  });
+
 });
