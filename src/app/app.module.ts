@@ -6,6 +6,7 @@ import {DetailModule} from './detail/detail.module';
 import {AppRoutingModule} from './app-routing.module';
 import {DragulaModule} from 'ng2-dragula';
 import {SampleComponent} from './sample/sample.component';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {SampleComponent} from './sample/sample.component';
     MainModule,
     DetailModule,
     AppRoutingModule,
-    DragulaModule
+    DragulaModule,
+    BrowserModule
   ],
   bootstrap: [AppComponent]
 })
