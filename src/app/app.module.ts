@@ -7,7 +7,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {DragulaModule} from 'ng2-dragula';
 import {SampleComponent} from './sample/sample.component';
 import {BrowserModule} from '@angular/platform-browser';
-import { ProjectComponent } from './project/project.component';
+import {ProjectComponent} from './project/project.component';
 
 @NgModule({
   declarations: [
