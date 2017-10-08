@@ -37,8 +37,10 @@ describe('SampleComponent', () => {
     expect(component.wasDropped).toBe(true);
   });
 
-  it('should get custom attribute value', () => {
-    const tempValue = document.getElementById('temp').dataset.tempvalue;
-    expect(tempValue).toBe('bar');
+  it('should get project id from custom attribute', () => {
+    const elementById = document.getElementById('projectId-5');
+    console.log(elementById);
+    const projectId = elementById.dataset.projectid;
+    expect(projectId).toBe('5');
   });
 });

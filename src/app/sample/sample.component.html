@@ -1,8 +1,8 @@
-<div id="temp" data-tempvalue="bar">
+<div>
   <div class='wrapper'>
     <div class='container' [dragula]='"bag-one"' [dragulaModel]="openProjects">
       <div class="element" *ngFor="let project of openProjects">
-        <app-project [project]="project"></app-project>
+        <app-project id="projectId-{{project.id}}" [attr.data-projectid]="project.id" [project]="project"></app-project>
       </div>
     </div>
     <div class='container' [dragula]='"bag-one"' [dragulaModel]="inProgressProjects">
