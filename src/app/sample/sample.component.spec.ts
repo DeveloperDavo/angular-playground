@@ -2,6 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SampleComponent} from './sample.component';
 import {DragulaModule} from 'ng2-dragula';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('SampleComponent', () => {
   let component: SampleComponent;
@@ -10,7 +11,8 @@ describe('SampleComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [DragulaModule],
-      declarations: [SampleComponent]
+      declarations: [SampleComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
       .compileComponents();
   }));

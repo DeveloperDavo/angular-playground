@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProjectComponent } from './project.component';
+import {ProjectComponent} from './project.component';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -8,14 +8,15 @@ describe('ProjectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectComponent ]
+      declarations: [ProjectComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProjectComponent);
     component = fixture.componentInstance;
+    component.project = {id: 4, description: 'foo'};
     fixture.detectChanges();
   });
 
