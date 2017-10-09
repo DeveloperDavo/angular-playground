@@ -1,14 +1,12 @@
 <div>
   <div class='wrapper'>
     <div class='container' [dragula]='"bag-one"' [dragulaModel]="openProjects">
-      <div class="element" *ngFor="let project of openProjects">
-        <app-project id="projectId-{{project.id}}" [attr.data-projectid]="project.id" [project]="project"></app-project>
-      </div>
+      <app-project *ngFor="let project of openProjects" id="projectId-{{project.id}}" [attr.data-projectid]="project.id"
+                   [project]="project"></app-project>
     </div>
     <div class='container' [dragula]='"bag-one"' [dragulaModel]="inProgressProjects">
-      <div class="element" *ngFor="let project of inProgressProjects">
-        <app-project [project]="project"></app-project>
-      </div>
+      <app-project *ngFor="let project of inProgressProjects" [attr.data-projectid]="project.id"
+                   [project]="project"></app-project>
     </div>
   </div>
 </div>
