@@ -1,12 +1,11 @@
 import {Routes, RouterModule} from '@angular/router';
-import {MainComponent} from './main/main.component';
-import {DetailComponent} from './detail/detail.component';
+import {MainComponent} from './users/main/main.component';
+import {DetailComponent} from './users/detail/detail.component';
 import {NgModule} from '@angular/core';
 
 const appRoutes: Routes = [
   {path: 'main', component: MainComponent},
   {path: 'detail/:id', component: DetailComponent},
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
 ];
 
 @NgModule({
